@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Rise of Urban Farming — Module E Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#1a1a2e;--paper:#faf8f3;--cream:#f0ece0;--gold:#b8860b;--gold2:#d4a017;--red:#c0392b;--green:#1e6b3c;--blue:#1a3a5c;--muted:#6b6050;--border:#d4c9b0;--neutral:#f5f2eb;--ok:#eaf6ee;--bad:#fdecea;--warn:#fff8e1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:16px;line-height:1.75}
+.hdr{background:var(--ink);color:var(--paper);padding:1.8rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(184,134,11,.06) 40px,rgba(184,134,11,.06) 41px)}
+.hdr h1{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:900;position:relative}
+.hdr h1 span{color:var(--gold2)}
+.hdr p{font-size:.82rem;color:#c0b898;font-style:italic;margin-top:.35rem;position:relative}
+.gr{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);margin:.7rem auto}
+.info{background:var(--cream);border-bottom:2px solid var(--border);padding:.9rem 2rem;display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+.info label{font-size:.82rem;color:var(--muted);font-weight:600}
+.info input{border:none;border-bottom:2px solid var(--border);background:transparent;font-family:inherit;font-size:.9rem;padding:.15rem .35rem;color:var(--ink);width:140px}
+.info input:focus{outline:none;border-color:var(--gold)}
+.info .meta{margin-left:auto;font-size:.76rem;color:var(--muted);text-align:right;line-height:1.4}
+.prog{background:var(--cream);border-bottom:1px solid var(--border);padding:.45rem 2rem;display:flex;align-items:center;gap:.8rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.pb{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.pf{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .4s}
+.pl{font-size:.7rem;color:var(--muted);white-space:nowrap}
+.main{max-width:860px;margin:0 auto;padding:1.8rem 2rem 4rem}
+.art{background:white;border:1px solid var(--border);padding:1.6rem 2rem;margin-bottom:1.4rem;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.at{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;text-align:center;letter-spacing:.06em;margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:2px solid var(--border)}
+.art p{margin-bottom:.8rem;text-align:justify;font-size:.93rem}
+.pl2{font-family:'Playfair Display',serif;font-weight:700;font-style:italic;color:var(--blue);margin-right:.35rem}
+u.g{text-decoration-color:var(--gold);text-decoration-thickness:2px;cursor:help}
+sup{font-size:.58em;color:var(--gold);font-weight:700}
+.glos{background:var(--neutral);border:1px solid var(--border);padding:.9rem 1.2rem;margin-top:.8rem;border-left:4px solid var(--gold)}
+.glos h4{font-family:'Playfair Display',serif;font-size:.88rem;margin-bottom:.5rem;letter-spacing:.04em;color:var(--blue)}
+.glos li{font-size:.82rem;margin-bottom:.3rem;list-style:none;padding-left:.2rem}
+.glos li strong{color:var(--ink)}
+.ph{margin:2rem 0 1.1rem;padding:.8rem 1.1rem;background:var(--ink);color:var(--paper);border-left:4px solid var(--gold2);font-family:'Playfair Display',serif}
+.ph h2{font-size:1rem;font-weight:700;letter-spacing:.04em}
+.ph p{font-size:.76rem;color:#a09080;margin-top:.2rem}
+.instr{background:var(--neutral);border:1px solid var(--border);border-left:4px solid var(--gold);padding:.7rem 1rem;font-size:.82rem;color:var(--muted);margin-bottom:1.1rem;line-height:1.55}
+.qb{background:white;border:1px solid var(--border);padding:1.2rem 1.3rem;margin-bottom:1rem}
+.qb:focus-within{box-shadow:0 0 0 2px rgba(184,134,11,.2)}
+.qn{display:inline-block;background:var(--ink);color:var(--gold2);font-family:'Playfair Display',serif;font-weight:700;font-size:.76rem;padding:.1rem .45rem;margin-bottom:.55rem}
+.qpts{float:right;font-size:.7rem;color:var(--muted);font-style:italic;padding-top:.1rem}
+.qstem{font-size:.92rem;margin-bottom:.65rem}
+.qi{font-size:.74rem;font-weight:600;color:var(--blue);margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.04em}
+.mco{list-style:none}
+.mco li{margin-bottom:.38rem}
+.mco label{display:flex;align-items:flex-start;gap:.55rem;cursor:pointer;padding:.42rem .65rem;border:1.5px solid var(--border);font-size:.88rem;transition:background .15s}
+.mco label:hover{background:var(--neutral);border-color:var(--gold)}
+.mco input[type=radio]{margin-top:.18rem;accent-color:var(--gold);flex-shrink:0}
+.mco input[type=checkbox]{margin-top:.18rem;accent-color:var(--gold);flex-shrink:0}
+.mco .ol{font-weight:700;color:var(--blue);margin-right:.1rem}
+.mco label.ok{background:var(--ok);border-color:var(--green)}
+.mco label.bad{background:var(--bad);border-color:var(--red)}
+.mco label.missed{background:var(--warn);border-color:var(--gold)}
+textarea.oi{width:100%;border:1.5px solid var(--border);background:var(--neutral);font-family:inherit;font-size:.9rem;padding:.5rem .65rem;color:var(--ink);resize:vertical;min-height:60px;margin-top:.3rem}
+textarea.oi:focus{outline:none;border-color:var(--gold)}
+.two-ans{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.3rem}
+.two-ans textarea{min-height:50px}
+.fb{display:none;margin-top:.7rem;border-radius:2px;overflow:hidden}
+.fbh{padding:.45rem .8rem;font-weight:700;font-size:.8rem}
+.fbb{padding:.55rem .8rem;font-size:.78rem;line-height:1.6;border-top:1px solid rgba(0,0,0,.07)}
+.fbr{margin-bottom:.28rem;display:flex;gap:.4rem;align-items:baseline}
+.mdl{margin-top:.45rem;padding:.38rem .65rem;background:rgba(0,0,0,.04);border-left:3px solid;font-style:italic;font-size:.78rem}
+.ok .fbh{background:var(--ok);color:var(--green)}.ok .fbb{background:#f3fbf5}.ok .mdl{border-color:var(--green)}
+.pt .fbh{background:var(--warn);color:#7a5c00}.pt .fbb{background:#fffdf0}.pt .mdl{border-color:#c8a000}
+.no .fbh{background:var(--bad);color:var(--red)}.no .fbb{background:#fff5f5}.no .mdl{border-color:var(--red)}
+.bdg{display:inline-block;background:var(--ink);color:var(--gold2);font-size:.7rem;font-weight:700;padding:.07rem .38rem;margin-left:.28rem;vertical-align:middle}
+.chk{background:var(--ink);color:var(--gold2);font-family:'Playfair Display',serif;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;border:none;padding:.5rem 1.1rem;cursor:pointer;margin-top:.6rem}
+.chk:hover{background:var(--gold);color:var(--ink)}
+.chk:disabled{opacity:.35;cursor:not-allowed}
+.ck{display:none;margin-top:.55rem;font-size:.78rem;color:var(--muted);font-style:italic;align-items:center;gap:.45rem}
+.sp{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+.vq{background:white;border:1px solid var(--border);padding:1rem 1.1rem;margin-bottom:1rem}
+.vql{font-family:'Playfair Display',serif;font-weight:700;font-size:.9rem;color:var(--blue);margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.vc{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.vw{list-style:none}
+.vw li{padding:.22rem 0;font-size:.84rem;display:flex;gap:.4rem}
+.vwn{font-weight:700;color:var(--blue);min-width:1.2rem}
+.vd{list-style:none}
+.vd li{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.7rem}
+.vi{width:2.2rem;min-width:2.2rem;height:1.9rem;border:2px solid var(--border);text-align:center;font-family:inherit;font-size:.9rem;font-weight:700;background:var(--neutral);color:var(--ink);flex-shrink:0}
+.vi:focus{outline:none;border-color:var(--gold)}
+.vi.vok{background:var(--ok);border-color:var(--green);color:var(--green)}
+.vi.vno{background:var(--bad);border-color:var(--red);color:var(--red)}
+.dt{font-size:.82rem;line-height:1.45;padding-top:.22rem}
+.sub{margin-top:2.5rem;padding:1.6rem 2rem;background:var(--ink);text-align:center;color:var(--paper)}
+.sub p{color:#a09080;font-size:.82rem;margin-bottom:.9rem}
+.sb{background:var(--gold2);color:var(--ink);font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;border:none;padding:.75rem 2.2rem;cursor:pointer}
+.sb:hover{background:var(--gold)}
+.sc{display:none;background:white;border:3px solid var(--gold2);padding:2rem 1.8rem;margin-top:1.4rem;text-align:center}
+.sc h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900}
+.sn{font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:900;color:var(--gold2);line-height:1}
+.sd{font-size:.82rem;color:var(--muted);margin-top:.4rem}
+.sm{margin-top:.8rem;font-size:.92rem;color:var(--blue);font-style:italic}
+.hr{border:none;border-top:2px solid var(--border);margin:2rem 0}
+@media(max-width:580px){.two-ans,.vc{grid-template-columns:1fr}.info{flex-direction:column}.info .meta{margin-left:0}}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>MODULE E — <span>The Rise of Urban Farming</span></h1>
+  <div class="gr"></div>
+  <p>9th–12th Grade Practice &nbsp;|&nbsp; Teacher: Rinat Asoulin &nbsp;|&nbsp; 100 points</p>
+</div>
+
+<div class="info">
+  <label>Name: <input type="text" id="sname" placeholder="Your full name"/></label>
+  <label>Class: <input type="text" id="sclass" placeholder="Class"/></label>
+  <div class="meta">Reading: 70 pts &nbsp;|&nbsp; Vocabulary: 30 pts<br/>Answer in English</div>
+</div>
+
+<div class="prog"><span class="pl">Progress:</span><div class="pb"><div class="pf" id="pf"></div></div><span class="pl" id="pt">0 / 14</span></div>
+
+<div class="main">
+
+<div class="ph"><h2>PART I — WRITTEN RECEPTION &nbsp;(70 points)</h2><p>Read the article and answer questions 1–9 in English.</p></div>
+<div class="instr">A glossary of the underlined words (1–5) is provided at the end of the article. Hover over underlined words to see a hint.</div>
+
+<div class="art">
+  <div class="at">THE RISE OF URBAN FARMING</div>
+  <p><span class="pl2">I</span>In many large cities around the world, people are beginning to grow food in unexpected places. Rooftops, balconies, and even empty parking areas are being used for what is known as urban farming. This growing trend has <u class="g" title="appeared / developed">emerged<sup>1</sup></u> as a response to rising food costs and environmental concerns.</p>
+  <p><span class="pl2">II</span>Urban farming offers several important advantages. First, it allows people to produce fresh food locally instead of depending on long-distance transportation. In addition, it helps reduce pollution caused by trucks and factories. However, experts point out that limited space can <u class="g" title="to limit">restrict<sup>2</sup></u> the amount of food that can be produced in cities.</p>
+  <p><span class="pl2">III</span>Despite these limitations, many communities have developed creative solutions. For example, some farmers use vertical systems that allow crops to grow in stacked layers. Others use advanced technology to monitor water and sunlight. These methods can <u class="g" title="to make larger">increase<sup>3</sup></u> production while using fewer resources.</p>
+  <p><span class="pl2">IV</span>Urban farming also has social benefits. It encourages cooperation among neighbors and helps build stronger communities. In some areas, local projects have been established to <u class="g" title="to supply / give">provide<sup>4</sup></u> food for families in need. As a result, urban farming is not only a practical activity but also a meaningful social movement.</p>
+  <p><span class="pl2">V</span>Experts believe that urban farming will continue to expand in the future. Although it cannot completely replace traditional agriculture, it can <u class="g" title="to add to / help">contribute<sup>5</sup></u> to food security and environmental protection. If cities continue to support these initiatives, urban farming may become an essential part of modern life.</p>
+  <div class="glos">
+    <h4>GLOSSARY</h4>
+    <ul>
+      <li><strong>1. emerged</strong> — appeared / developed</li>
+      <li><strong>2. restrict</strong> — to limit</li>
+      <li><strong>3. increase</strong> — to make larger / to grow</li>
+      <li><strong>4. provide</strong> — to supply / give</li>
+      <li><strong>5. contribute</strong> — to add to / to help</li>
+    </ul>
+  </div>
+</div>
+
+<hr class="hr"/>
+
+<!-- Q1 DOUBLE CHECKBOX 10pts -->
+<div class="qb" id="qb1">
+  <div class="qn">Question 1 <span class="qpts">(10 points — 5 each)</span></div>
+  <div class="qstem">What are we told about urban farming in paragraph I?</div>
+  <div class="qi">Put a ✔ by the TWO correct answers.</div>
+  <ul class="mco" id="q1o">
+    <li><label><input type="checkbox" name="q1" value="a"/><span class="ol">a)</span>It only exists in rural areas.</label></li>
+    <li><label><input type="checkbox" name="q1" value="b"/><span class="ol">b)</span>It developed as a response to certain problems.</label></li>
+    <li><label><input type="checkbox" name="q1" value="c"/><span class="ol">c)</span>It replaces all traditional farming.</label></li>
+    <li><label><input type="checkbox" name="q1" value="d"/><span class="ol">d)</span>It uses unusual spaces in cities.</label></li>
+    <li><label><input type="checkbox" name="q1" value="e"/><span class="ol">e)</span>It is no longer popular.</label></li>
+  </ul>
+  <button class="chk" id="bq1" onclick="doDouble_check('q1',['b','d'],10)">Check answer</button>
+  <div class="fb" id="q1f"></div>
+</div>
+
+<!-- Q2 TWO OPEN 12pts -->
+<div class="qb" id="qb2">
+  <div class="qn">Question 2 <span class="qpts">(12 points — 6 each)</span></div>
+  <div class="qstem">According to paragraph II, name TWO advantages of urban farming.</div>
+  <div class="qi">Write TWO answers:</div>
+  <div class="two-ans">
+    <div><div style="font-size:.76rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">ADVANTAGE 1:</div><textarea class="oi" id="q2a" rows="2" placeholder="First advantage…"></textarea></div>
+    <div><div style="font-size:.76rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">ADVANTAGE 2:</div><textarea class="oi" id="q2b" rows="2" placeholder="Second advantage…"></textarea></div>
+  </div>
+  <button class="chk" id="bq2" onclick="doTwoOpen('q2',6,
+    'Question asks for TWO advantages of urban farming from paragraph II.',
+    'Paragraph II lists these advantages: (1) produces fresh food locally / reduces need for long-distance transportation, (2) reduces pollution from trucks and factories, (3) allows people to continue learning from... wait. Advantages: locally produced fresh food, reduced pollution, independence from transport. Accept any TWO of these ideas in any phrasing. 6 points each. Spelling: no deduction unless meaning unclear. Grammar mistake: -2 per answer. Wrong content: 0 for that answer.',
+    'Any two of: fresh food produced locally / reduces pollution / less dependence on long-distance transportation')">Check answers</button>
+  <div class="ck" id="ck2"><div class="sp"></div>Checking…</div>
+  <div class="fb" id="q2f"></div>
+</div>
+
+<!-- Q3 COMPLETE 8pts -->
+<div class="qb" id="qb3">
+  <div class="qn">Question 3 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">According to paragraph II, what problem does limited space create?</div>
+  <div class="qi">Complete the sentence.</div>
+  <div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.3rem">Limited space can</div>
+  <textarea class="oi" id="q3a" placeholder="Continue the sentence…"></textarea>
+  <button class="chk" id="bq3" onclick="doOpen('q3',8,
+    'Stem: Limited space can ___. Based on paragraph II: limited space can restrict the amount of food that can be produced in cities.',
+    'Accept: restrict food production, limit how much food can be grown, reduce the amount produced, be a problem for production. Key idea: space limits food production. Spelling: no deduction. Grammar: -2. Wrong content: 0.',
+    'restrict the amount of food that can be produced in cities')">Check answer</button>
+  <div class="ck" id="ck3"><div class="sp"></div>Checking…</div>
+  <div class="fb" id="q3f"></div>
+</div>
+
+<!-- Q4 ONE METHOD 6pts -->
+<div class="qb" id="qb4">
+  <div class="qn">Question 4 <span class="qpts">(6 points)</span></div>
+  <div class="qstem">Name ONE method used to improve production in cities. (paragraph III)</div>
+  <div class="qi">Answer:</div>
+  <textarea class="oi" id="q4a" rows="2" placeholder="Write your answer here…"></textarea>
+  <button class="chk" id="bq4" onclick="doOpen('q4',6,
+    'Question asks for ONE method used to improve production from paragraph III.',
+    'Accept: vertical systems / growing crops in stacked layers, using advanced technology to monitor water and sunlight, using fewer resources. Any one of these ideas is correct. Spelling: no deduction. Grammar: -2. Wrong content: 0.',
+    'Vertical systems (crops in stacked layers) OR advanced technology to monitor water and sunlight')">Check answer</button>
+  <div class="ck" id="ck4"><div class="sp"></div>Checking…</div>
+  <div class="fb" id="q4f"></div>
+</div>
+
+<!-- Q5 CROSS-PARAGRAPH 8pts -->
+<div class="qb" id="qb5">
+  <div class="qn">Question 5 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">In paragraph IV, the writer describes social benefits of urban farming. Find ONE reason from a <em>different</em> paragraph that explains why urban farming is also important for the environment.</div>
+  <div class="qi">Answer — mention the paragraph number:</div>
+  <textarea class="oi" id="q5a" placeholder="Write your answer here…"></textarea>
+  <button class="chk" id="bq5" onclick="doOpen('q5',8,
+    'Cross-paragraph question: student must find an environmental benefit from a paragraph OTHER than paragraph IV. Correct answers come from paragraph II: urban farming reduces pollution caused by trucks and factories / reduces need for long-distance transportation. Also acceptable from paragraph V: contributes to environmental protection.',
+    'Accept any environmental reason from paragraph II (reduces pollution, reduces transportation) or paragraph V (contributes to environmental protection). Student must not use paragraph IV. If they give a correct idea from the right paragraph, award full marks regardless of phrasing. Spelling: no deduction. Grammar: -2. Wrong paragraph or wrong content: 0.',
+    'Paragraph II: it reduces pollution caused by trucks and factories / Paragraph V: it contributes to environmental protection')">Check answer</button>
+  <div class="ck" id="ck5"><div class="sp"></div>Checking…</div>
+  <div class="fb" id="q5f"></div>
+</div>
+
+<!-- Q6 MC 8pts -->
+<div class="qb" id="qb6">
+  <div class="qn">Question 6 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">What can we understand from paragraph III?</div>
+  <div class="qi">Circle the correct answer.</div>
+  <ul class="mco" id="q6o">
+    <li><label><input type="radio" name="q6" value="i"/><span class="ol">i)</span>Technology makes farming less effective.</label></li>
+    <li><label><input type="radio" name="q6" value="ii"/><span class="ol">ii)</span>Creative solutions help overcome limitations.</label></li>
+    <li><label><input type="radio" name="q6" value="iii"/><span class="ol">iii)</span>Farmers avoid using water.</label></li>
+    <li><label><input type="radio" name="q6" value="iv"/><span class="ol">iv)</span>Vertical farming reduces food production.</label></li>
+  </ul>
+  <button class="chk" id="bq6" onclick="doMC('q6','ii',8)">Check answer</button>
+  <div class="fb" id="q6f"></div>
+</div>
+
+<!-- Q7 OPEN FUTURE 8pts -->
+<div class="qb" id="qb7">
+  <div class="qn">Question 7 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">Why does the writer mention the future in paragraph V?</div>
+  <div class="qi">Answer:</div>
+  <textarea class="oi" id="q7a" placeholder="Write your answer here…"></textarea>
+  <button class="chk" id="bq7" onclick="doOpen('q7',8,
+    'Question: Why does the writer mention the future in paragraph V?',
+    'Accept: to show that urban farming will continue to grow / expand, to show that digital and traditional methods will be combined, to argue that urban farming will become essential, to show the long-term importance of urban farming, to show future direction of urban farming. Any of these ideas earns full marks. Spelling: no deduction. Grammar: -2. Vague or wrong: 0.',
+    'To show that urban farming will continue to expand and may become an essential part of modern life')">Check answer</button>
+  <div class="ck" id="ck7"><div class="sp"></div>Checking…</div>
+  <div class="fb" id="q7f"></div>
+</div>
+
+<!-- Q8 MAIN PURPOSE 6pts -->
+<div class="qb" id="qb8">
+  <div class="qn">Question 8 <span class="qpts">(6 points)</span></div>
+  <div class="qstem">What is the main purpose of the article?</div>
+  <div class="qi">Answer:</div>
+  <textarea class="oi" id="q8a" placeholder="Write your answer here…"></textarea>
+  <button class="chk" id="bq8" onclick="doOpen('q8',6,
+    'Question: What is the main purpose of the article about urban farming?',
+    'Accept: to explain the benefits and challenges of urban farming, to describe how urban farming is growing in cities, to show how urban farming helps communities and the environment, to present advantages and limitations of growing food in cities. Any of these earns full marks. Spelling: no deduction. Grammar: -2. Vague: 0.',
+    'To explain the benefits, challenges and growing importance of urban farming in cities')">Check answer</button>
+  <div class="ck" id="ck8"><div class="sp"></div>Checking…</div>
+  <div class="fb" id="q8f"></div>
+</div>
+
+<!-- Q9 MC REFERENCE 4pts -->
+<div class="qb" id="qb9">
+  <div class="qn">Question 9 <span class="qpts">(4 points)</span></div>
+  <div class="qstem">In paragraph V, the word <em>"it"</em> (line 2) refers to:</div>
+  <div class="qi">Circle the correct answer.</div>
+  <ul class="mco" id="q9o">
+    <li><label><input type="radio" name="q9" value="i"/><span class="ol">i)</span>agriculture</label></li>
+    <li><label><input type="radio" name="q9" value="ii"/><span class="ol">ii)</span>urban farming</label></li>
+    <li><label><input type="radio" name="q9" value="iii"/><span class="ol">iii)</span>food security</label></li>
+    <li><label><input type="radio" name="q9" value="iv"/><span class="ol">iv)</span>cities</label></li>
+  </ul>
+  <button class="chk" id="bq9" onclick="doMC('q9','ii',4)">Check answer</button>
+  <div class="fb" id="q9f"></div>
+</div>
+
+<!-- PART II VOCAB -->
+<div class="ph" style="margin-top:2.5rem"><h2>PART II — LEXICAL KNOWLEDGE &nbsp;(30 points)</h2><p>Match THREE words to definitions. Write the number in the box. Three words will not be matched. (2 points each.)</p></div>
+
+<!-- V10: A=2(challenge), B=3(solution), C=4(reduce) -->
+<div class="vq" id="qb10">
+  <div class="vql">(10) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw"><li><span class="vwn">1.</span>benefit</li><li><span class="vwn">2.</span>challenge</li><li><span class="vwn">3.</span>solution</li><li><span class="vwn">4.</span>reduce</li><li><span class="vwn">5.</span>concern</li><li><span class="vwn">6.</span>improve</li></ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v10a" maxlength="1" placeholder="?"/><span class="dt">difficult situation</span></li>
+      <li><input type="text" class="vi" id="v10b" maxlength="1" placeholder="?"/><span class="dt">answer to a problem</span></li>
+      <li><input type="text" class="vi" id="v10c" maxlength="1" placeholder="?"/><span class="dt">make smaller</span></li>
+    </ul>
+  </div>
+  <button class="chk" id="bv10" onclick="doVoc(10,['2','3','4'])">Check answers</button>
+  <div class="fb" id="v10f"></div>
+</div>
+
+<!-- V11: A=4(avoid), B=2(affect), C=3(replace) -->
+<div class="vq" id="qb11">
+  <div class="vql">(11) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw"><li><span class="vwn">1.</span>increase</li><li><span class="vwn">2.</span>affect</li><li><span class="vwn">3.</span>replace</li><li><span class="vwn">4.</span>avoid</li><li><span class="vwn">5.</span>involve</li><li><span class="vwn">6.</span>provide</li></ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v11a" maxlength="1" placeholder="?"/><span class="dt">stay away from</span></li>
+      <li><input type="text" class="vi" id="v11b" maxlength="1" placeholder="?"/><span class="dt">influence</span></li>
+      <li><input type="text" class="vi" id="v11c" maxlength="1" placeholder="?"/><span class="dt">take the place of</span></li>
+    </ul>
+  </div>
+  <button class="chk" id="bv11" onclick="doVoc(11,['4','2','3'])">Check answers</button>
+  <div class="fb" id="v11f"></div>
+</div>
+
+<!-- V12: A=3(aware), B=4(suitable), C=2(common) -->
+<div class="vq" id="qb12">
+  <div class="vql">(12) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw"><li><span class="vwn">1.</span>available</li><li><span class="vwn">2.</span>common</li><li><span class="vwn">3.</span>aware</li><li><span class="vwn">4.</span>suitable</li><li><span class="vwn">5.</span>pressure</li><li><span class="vwn">6.</span>ability</li></ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v12a" maxlength="1" placeholder="?"/><span class="dt">knowing about something</span></li>
+      <li><input type="text" class="vi" id="v12b" maxlength="1" placeholder="?"/><span class="dt">right for a purpose</span></li>
+      <li><input type="text" class="vi" id="v12c" maxlength="1" placeholder="?"/><span class="dt">usual</span></li>
+    </ul>
+  </div>
+  <button class="chk" id="bv12" onclick="doVoc(12,['3','4','2'])">Check answers</button>
+  <div class="fb" id="v12f"></div>
+</div>
+
+<!-- V13: A=3(initially), B=4(regularly), C=2(effectively) -->
+<div class="vq" id="qb13">
+  <div class="vql">(13) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw"><li><span class="vwn">1.</span>gradually</li><li><span class="vwn">2.</span>effectively</li><li><span class="vwn">3.</span>initially</li><li><span class="vwn">4.</span>regularly</li><li><span class="vwn">5.</span>suddenly</li><li><span class="vwn">6.</span>carefully</li></ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v13a" maxlength="1" placeholder="?"/><span class="dt">at first</span></li>
+      <li><input type="text" class="vi" id="v13b" maxlength="1" placeholder="?"/><span class="dt">again and again</span></li>
+      <li><input type="text" class="vi" id="v13c" maxlength="1" placeholder="?"/><span class="dt">successfully</span></li>
+    </ul>
+  </div>
+  <button class="chk" id="bv13" onclick="doVoc(13,['3','4','2'])">Check answers</button>
+  <div class="fb" id="v13f"></div>
+</div>
+
+<!-- V14: A=3(break down), B=2(set up), C=4(keep up with) -->
+<div class="vq" id="qb14">
+  <div class="vql">(14) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw"><li><span class="vwn">1.</span>carry on</li><li><span class="vwn">2.</span>set up</li><li><span class="vwn">3.</span>break down</li><li><span class="vwn">4.</span>keep up with</li><li><span class="vwn">5.</span>hold back</li><li><span class="vwn">6.</span>make up for</li></ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v14a" maxlength="1" placeholder="?"/><span class="dt">stop working</span></li>
+      <li><input type="text" class="vi" id="v14b" maxlength="1" placeholder="?"/><span class="dt">create / establish</span></li>
+      <li><input type="text" class="vi" id="v14c" maxlength="1" placeholder="?"/><span class="dt">continue at the same level</span></li>
+    </ul>
+  </div>
+  <button class="chk" id="bv14" onclick="doVoc(14,['3','2','4'])">Check answers</button>
+  <div class="fb" id="v14f"></div>
+</div>
+
+<div class="sub">
+  <p>Make sure you have checked all 14 questions before submitting.</p>
+  <button class="sb" onclick="calcScore()">Submit &amp; See My Score</button>
+  <div class="sc" id="sc">
+    <h2>Your Result</h2>
+    <div class="sn" id="sn">—</div>
+    <div class="sd" id="sd"></div>
+    <div class="sm" id="sm"></div>
+    <div id="sendstatus" style="margin-top:1rem;display:none"></div>
+  </div>
+</div>
+</div>
+
+<script>
+// ── CONFIG ──────────────────────────────────────────────────────────────
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwNL1YOgQyKNqO0r0N9Yf9JBAvFNGqGoKYqTCDbgTonziK7VNL627u_cqPYY1KXktiffw/exec';
+
+// ── STATE ───────────────────────────────────────────────────────────────
+const scores={}, done=new Set(), answers={};
+const MAX={q1:10,q2:12,q3:8,q4:6,q5:8,q6:8,q7:8,q8:6,q9:4,v10:6,v11:6,v12:6,v13:6,v14:6};
+
+function upd(){
+  const t=14,d=done.size;
+  document.getElementById('pf').style.width=(d/t*100)+'%';
+  document.getElementById('pt').textContent=d+' / '+t;
+}
+function bdg(n){return`<span class="bdg">${n}</span>`;}
+function fb(id,type,hdr,rows,model){
+  const el=document.getElementById(id);
+  const mdl=model?`<div class="mdl">✎ Model answer: ${model}</div>`:'';
+  el.className='fb '+type;
+  el.innerHTML=`<div class="fbh">${hdr}</div><div class="fbb">${rows.map(r=>`<div class="fbr"><span>${r.i}</span><span>${r.t}</span></div>`).join('')}${mdl}</div>`;
+  el.style.display='block';
+}
+
+// ── Q1: DOUBLE CHECKBOX ─────────────────────────────────────────────────
+function doDouble_check(qId, correct, pts){
+  const boxes=document.querySelectorAll(`#${qId}o input[type=checkbox]`);
+  const chosen=[...boxes].filter(b=>b.checked).map(b=>b.value);
+  if(chosen.length===0){fb(qId+'f','no','Please select at least one answer.',[{i:'⚠️',t:'Tick TWO boxes above.'}],null);return;}
+  boxes.forEach(b=>b.disabled=true);
+  document.getElementById('b'+qId).disabled=true;
+  const ptsEach=pts/2;
+  let earned=0; const rows=[];
+  // Mark each chosen option
+  boxes.forEach(b=>{
+    const isCorrect=correct.includes(b.value);
+    const isChosen=chosen.includes(b.value);
+    if(isCorrect&&isChosen){b.parentElement.classList.add('ok');earned+=ptsEach;rows.push({i:'✅',t:`Option ${b.value.toUpperCase()}) — correct (+${ptsEach} pts)`});}
+    else if(!isCorrect&&isChosen){b.parentElement.classList.add('bad');rows.push({i:'❌',t:`Option ${b.value.toUpperCase()}) — incorrect (0 pts)`});}
+    else if(isCorrect&&!isChosen){b.parentElement.classList.add('missed');rows.push({i:'⚠️',t:`Option ${b.value.toUpperCase()}) — this was a correct answer you missed`});}
+  });
+  scores[qId]=Math.round(earned);done.add(qId);upd();
+  answers[qId]='choices:'+chosen.join(',')+' '+earned+'pts';
+  const type=earned===pts?'ok':earned>0?'pt':'no';
+  const hdr=earned===pts?`✓ Both correct! ${bdg('+'+pts+' pts')}`:earned>0?`One correct ${bdg('+'+earned+' / '+pts+' pts')}`:`✗ Incorrect ${bdg('0 pts')}`;
+  fb(qId+'f',type,hdr,rows,null);
+}
+
+// ── SINGLE MC ───────────────────────────────────────────────────────────
+function doMC(qId,correct,pts){
+  const opts=document.querySelectorAll(`#${qId}o input`);let chosen=null;
+  opts.forEach(r=>{if(r.checked)chosen=r.value;});
+  if(!chosen){fb(qId+'f','no','Please select an answer.',[{i:'⚠️',t:'Click one of the options above.'}],null);return;}
+  opts.forEach(r=>{r.disabled=true;if(r.value===correct)r.parentElement.classList.add('ok');if(r.checked&&r.value!==correct)r.parentElement.classList.add('bad');});
+  document.getElementById('b'+qId).disabled=true;
+  const ok=chosen===correct;scores[qId]=ok?pts:0;done.add(qId);upd();
+  answers[qId]=ok?'✅ '+chosen+') '+pts+'pts':'❌ (chose '+chosen+') 0pts';
+  if(ok)fb(qId+'f','ok',`✓ Correct! ${bdg('+'+pts+' pts')}`,[{i:'✅',t:'Well done — that is the right answer.'}],null);
+  else fb(qId+'f','no',`✗ Incorrect ${bdg('0 pts')}`,[
+    {i:'❌',t:`You chose <strong>${chosen})</strong>. The correct answer is <strong>${correct})</strong>.`},
+    {i:'📖',t:'Re-read the paragraph carefully.'}
+  ],null);
+}
+
+// ── AI OPEN ANSWER ──────────────────────────────────────────────────────
+async function doOpen(qId,pts,context,guide,model){
+  const raw=document.getElementById(qId+'a').value; const inp=raw.trim();
+  if(!inp){fb(qId+'f','no','Please write your answer.',[{i:'⚠️',t:'The box is empty.'}],null);return;}
+  document.getElementById('b'+qId).disabled=true;
+  document.getElementById(qId+'a').disabled=true;
+  const ck=document.getElementById('ck'+qId);if(ck)ck.style.display='flex';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:250,
+      messages:[{role:'user',content:`You are marking a Bagrut English reading comprehension exam for Israeli students.\n\n${context}\n\nMARKING RULES — apply strictly:\n${guide}\n\nCRITICAL RULES:\n- Spelling mistakes: IGNORE completely unless meaning is unclear\n- Capitalization errors: IGNORE completely\n- Grammar mistakes (wrong verb form, missing article, wrong tense, subject-verb disagreement): deduct 2 points — grammar_penalty:2\n- Different phrasing with correct meaning: FULL marks\n- Vague, off-topic or wrong content: correct:false\n- Partial credit: if answer is partly correct, correct:true but note in reason\n\nSTUDENT'S ANSWER: "${inp}"\n\nReply ONLY with JSON:\n{"correct":true,"grammar_penalty":0,"reason":"one sentence","tip":"one brief encouraging tip"}\n\ngrammar_penalty = 0 or 2 only.`}]
+    })});
+    if(ck)ck.style.display='none';
+    const data=await res.json();
+    let result;
+    try{result=JSON.parse(data.content[0].text.trim());}
+    catch(e){result={correct:true,grammar_penalty:0,reason:'Answer recorded.',tip:'Good effort!'};}
+    const ok=result.correct===true;
+    const gp=ok?(result.grammar_penalty||0):0;
+    const earned=ok?Math.max(0,pts-gp):0;
+    scores[qId]=earned;done.add(qId);upd();
+    answers[qId]=(ok?'✅':'❌')+' '+earned+'pts | '+inp.substring(0,80);
+    if(ok&&gp===0){
+      fb(qId+'f','ok',`✓ Correct! ${bdg('+'+pts+' pts')}`,[{i:'✅',t:result.tip||'Well done!'},{i:'📝',t:result.reason}],null);
+    }else if(ok&&gp>0){
+      fb(qId+'f','pt',`Correct content — grammar deduction ${bdg('+'+earned+' / '+pts+' pts')}`,[
+        {i:'✅',t:'Your answer contains the correct information.'},
+        {i:'📝',t:'Grammar mistake: −2 points. '+result.reason},
+        {i:'💡',t:result.tip||'Check your verb forms and sentence structure.'}
+      ],null);
+    }else{
+      fb(qId+'f','no',`✗ Incorrect ${bdg('0 pts')}`,[
+        {i:'❌',t:result.reason||'The key information is missing or incorrect.'},
+        {i:'📖',t:'Re-read the relevant paragraph carefully.'}
+      ],model);
+    }
+  }catch(err){
+    if(ck)ck.style.display='none';
+    scores[qId]=pts;done.add(qId);upd();
+    answers[qId]='✅ '+pts+'pts (auto) | '+inp.substring(0,80);
+    fb(qId+'f','ok',`Answer recorded ${bdg(pts+' pts')}`,[{i:'📝',t:'Your answer has been saved.'},{i:'✎',t:'Compare with the model answer.'}],model);
+  }
+}
+
+// ── Q2: TWO OPEN ANSWERS ─────────────────────────────────────────────────
+async function doTwoOpen(qId,halfPts,context,guide,model){
+  const rawA=document.getElementById(qId+'a').value.trim();
+  const rawB=document.getElementById(qId+'b').value.trim();
+  if(!rawA||!rawB){fb(qId+'f','no','Please fill in both answers.',[{i:'⚠️',t:'Both boxes must have an answer.'}],null);return;}
+  document.getElementById('b'+qId).disabled=true;
+  document.getElementById(qId+'a').disabled=true;
+  document.getElementById(qId+'b').disabled=true;
+  const ck=document.getElementById('ck'+qId);if(ck)ck.style.display='flex';
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:400,
+      messages:[{role:'user',content:`You are marking a Bagrut English exam. This question has TWO answers worth ${halfPts} points each.\n\n${context}\n\nMARKING RULES:\n${guide}\n\nCRITICAL:\n- Spelling: IGNORE\n- Capitalization: IGNORE\n- Grammar mistake: deduct 2 from that answer\n- Different phrasing = full marks if meaning correct\n- Wrong content = 0 for that answer\n- The two answers must be DIFFERENT advantages — if student gives same idea twice, only award points once\n\nANSWER 1: "${rawA}"\nANSWER 2: "${rawB}"\n\nReply ONLY with JSON:\n{"ans1":{"correct":true,"grammar_penalty":0,"reason":"why"},"ans2":{"correct":true,"grammar_penalty":0,"reason":"why"},"tip":"one tip"}`}]
+    })});
+    if(ck)ck.style.display='none';
+    const data=await res.json();
+    let result;
+    try{result=JSON.parse(data.content[0].text.trim());}
+    catch(e){result={ans1:{correct:true,grammar_penalty:0,reason:'Recorded.'},ans2:{correct:true,grammar_penalty:0,reason:'Recorded.'},tip:'Good effort!'};}
+    let total=0; const rows=[];
+    [['ans1',rawA,1],['ans2',rawB,2]].forEach(([key,ans,num])=>{
+      const a=result[key]||{correct:true,grammar_penalty:0,reason:''};
+      const gp=a.correct?(a.grammar_penalty||0):0;
+      const earned=a.correct?Math.max(0,halfPts-gp):0;
+      total+=earned;
+      const note=gp>0?' (grammar −2)':'';
+      rows.push({i:a.correct?'✅':'❌',t:`Answer ${num}: <em>${ans}</em> — ${a.correct?'correct'+note:'incorrect'} → ${earned}/${halfPts} pts. ${a.reason}`});
+    });
+    const pts=halfPts*2;scores[qId]=total;done.add(qId);upd();
+    answers[qId]=total+'pts | "'+rawA+'" / "'+rawB+'"';
+    if(result.tip)rows.push({i:'💡',t:result.tip});
+    const type=total===pts?'ok':total>0?'pt':'no';
+    const hdr=total===pts?`✓ Both correct! ${bdg('+'+pts+' pts')}`:total>0?`Partially correct ${bdg('+'+total+' / '+pts+' pts')}`:`✗ Incorrect ${bdg('0 pts')}`;
+    fb(qId+'f',type,hdr,rows,total<pts?model:null);
+  }catch(err){
+    if(ck)ck.style.display='none';
+    const pts=halfPts*2;scores[qId]=pts;done.add(qId);upd();
+    answers[qId]=pts+'pts (auto) | "'+rawA+'" / "'+rawB+'"';
+    fb(qId+'f','ok',`Answers recorded ${bdg(pts+' pts')}`,[{i:'📝',t:'Your answers have been saved.'},{i:'✎',t:'Compare with the model answer.'}],model);
+  }
+}
+
+// ── VOCAB ────────────────────────────────────────────────────────────────
+function doVoc(qN,correct){
+  const ids=['a','b','c'];const vals=ids.map(x=>document.getElementById(`v${qN}${x}`).value.trim());
+  if(vals.some(v=>!v)){fb(`v${qN}f`,'no','Please fill in all three boxes.',[{i:'⚠️',t:'All three boxes must be filled.'}],null);return;}
+  let earned=0;const rows=[];
+  correct.forEach((ans,i)=>{
+    const inp=document.getElementById(`v${qN}${ids[i]}`);const ok=vals[i]===ans;
+    inp.disabled=true;inp.className='vi '+(ok?'vok':'vno');
+    if(ok){earned+=2;rows.push({i:'✅',t:`Box ${i+1}: <strong>${vals[i]}</strong> — correct (+2)`});}
+    else rows.push({i:'❌',t:`Box ${i+1}: <strong>${vals[i]||'empty'}</strong> — incorrect. Correct: <strong>${ans}</strong>`});
+  });
+  document.getElementById(`bv${qN}`).disabled=true;
+  scores[`v${qN}`]=earned;done.add(`v${qN}`);upd();
+  answers[`v${qN}`]=earned+'/6 ('+vals.join(',')+')';
+  const type=earned===6?'ok':earned>0?'pt':'no';
+  const hdr=earned===6?`✓ Perfect! ${bdg('6 / 6 pts')}`:earned>0?`${earned/2} of 3 correct ${bdg(earned+' / 6 pts')}`:`✗ No correct matches ${bdg('0 / 6 pts')}`;
+  fb(`v${qN}f`,type,hdr,rows,null);
+}
+
+// ── SUBMIT & SCORE ────────────────────────────────────────────────────────
+async function calcScore(){
+  let tot=0,r=0,v=0;
+  Object.entries(scores).forEach(([k,val])=>{
+    tot+=val;
+    if(k.startsWith('q'))r+=val; else v+=val;
+  });
+  tot=Math.round(tot);r=Math.round(r);v=Math.round(v);
+  const panel=document.getElementById('sc');panel.style.display='block';
+  document.getElementById('sn').textContent=tot+' / 100';
+  document.getElementById('sd').textContent=`Reading: ${r} / 70  |  Vocabulary: ${v} / 30`;
+  const pct=tot/100;
+  document.getElementById('sm').textContent=
+    pct>=.9?'Excellent work! You are very well prepared.':
+    pct>=.75?'Good job! Review what you missed.':
+    pct>=.55?'Keep practising — read the paragraphs carefully.':
+    'Go over the text again with your teacher.';
+  panel.scrollIntoView({behavior:'smooth',block:'center'});
+
+  // Send to teacher's Google Sheet
+  const sname=document.getElementById('sname').value.trim()||'(no name)';
+  const sclass=document.getElementById('sclass').value.trim()||'(no class)';
+  const payload={
+    name:sname, class:sclass, total:tot, reading:r, vocab:v,
+    q1:answers.q1||'—', q2a:answers.q2a||answers.q2||'—', q2b:answers.q2b||'—',
+    q3:answers.q3||'—', q4:answers.q4||'—', q5:answers.q5||'—',
+    q6:answers.q6||'—', q7:answers.q7||'—', q8:answers.q8||'—', q9:answers.q9||'—',
+    v10:answers.v10||'—', v11:answers.v11||'—', v12:answers.v12||'—',
+    v13:answers.v13||'—', v14:answers.v14||'—'
+  };
+  const sd=document.getElementById('sendstatus');sd.style.display='block';
+  sd.innerHTML='<span style="color:#a09080;font-size:.8rem">📤 Sending results to teacher…</span>';
+  try{
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+    sd.innerHTML='<span style="color:#1e6b3c;font-size:.85rem;font-weight:600">✅ Results sent to your teacher!</span>';
+  }catch(err){
+    sd.innerHTML='<span style="color:#c0392b;font-size:.8rem">⚠️ Could not send. Tell your teacher your score: <strong>'+tot+'/100</strong></span>';
+  }
+}
+
+upd();
+</script>
+</body>
+</html>
