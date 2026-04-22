@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>The Science of Sleep — Module E Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<style>
+:root{--ink:#1a1a2e;--paper:#faf8f3;--cream:#f0ece0;--gold:#b8860b;--gold2:#d4a017;--red:#c0392b;--green:#1e6b3c;--blue:#1a3a5c;--muted:#6b6050;--border:#d4c9b0;--neutral:#f5f2eb;--ok:#eaf6ee;--bad:#fdecea;--warn:#fff8e1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:16px;line-height:1.75}
+.hdr{background:var(--ink);color:var(--paper);padding:1.8rem 2rem;text-align:center;position:relative;overflow:hidden}
+.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(184,134,11,.06) 40px,rgba(184,134,11,.06) 41px)}
+.hdr h1{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:900;position:relative}
+.hdr h1 span{color:var(--gold2)}
+.hdr p{font-size:.82rem;color:#c0b898;font-style:italic;margin-top:.35rem;position:relative}
+.gr{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);margin:.7rem auto}
+.info{background:var(--cream);border-bottom:2px solid var(--border);padding:.9rem 2rem;display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
+.info label{font-size:.82rem;color:var(--muted);font-weight:600}
+.info input{border:none;border-bottom:2px solid var(--border);background:transparent;font-family:inherit;font-size:.9rem;padding:.15rem .35rem;color:var(--ink);width:160px;transition:border-color .2s}
+.info input:focus{outline:none;border-color:var(--gold)}
+.info input.error{border-bottom-color:var(--red)}
+.info .meta{margin-left:auto;font-size:.76rem;color:var(--muted);text-align:right;line-height:1.4}
+.main{max-width:860px;margin:0 auto;padding:1.8rem 2rem 4rem}
+.art{background:white;border:1px solid var(--border);padding:1.6rem 2rem;margin-bottom:1.4rem;box-shadow:0 2px 12px rgba(0,0,0,.05)}
+.at{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;text-align:center;letter-spacing:.06em;margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:2px solid var(--border)}
+.art p{margin-bottom:.8rem;text-align:justify;font-size:.93rem}
+.pl2{font-family:'Playfair Display',serif;font-weight:700;font-style:italic;color:var(--blue);margin-right:.35rem}
+u.g{text-decoration-color:var(--gold);text-decoration-thickness:2px;cursor:help}
+sup{font-size:.58em;color:var(--gold);font-weight:700}
+.glos{background:var(--neutral);border:1px solid var(--border);padding:.9rem 1.2rem;margin-top:.8rem;border-left:4px solid var(--gold)}
+.glos h4{font-family:'Playfair Display',serif;font-size:.88rem;margin-bottom:.5rem;letter-spacing:.04em;color:var(--blue)}
+.glos li{font-size:.82rem;margin-bottom:.3rem;list-style:none}
+.glos li strong{color:var(--ink)}
+.ph{margin:2rem 0 1.1rem;padding:.8rem 1.1rem;background:var(--ink);color:var(--paper);border-left:4px solid var(--gold2);font-family:'Playfair Display',serif}
+.ph h2{font-size:1rem;font-weight:700;letter-spacing:.04em}
+.ph p{font-size:.76rem;color:#a09080;margin-top:.2rem}
+.qb{background:white;border:1px solid var(--border);padding:1.2rem 1.3rem;margin-bottom:1rem}
+.qn{display:inline-block;background:var(--ink);color:var(--gold2);font-family:'Playfair Display',serif;font-weight:700;font-size:.76rem;padding:.1rem .45rem;margin-bottom:.55rem}
+.qpts{float:right;font-size:.7rem;color:var(--muted);font-style:italic;padding-top:.1rem}
+.qstem{font-size:.92rem;margin-bottom:.65rem}
+.qi{font-size:.74rem;font-weight:600;color:var(--blue);margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.04em}
+.mco{list-style:none}
+.mco li{margin-bottom:.38rem}
+.mco label{display:flex;align-items:flex-start;gap:.55rem;cursor:pointer;padding:.42rem .65rem;border:1.5px solid var(--border);font-size:.88rem;transition:background .15s}
+.mco label:hover{background:var(--neutral);border-color:var(--gold)}
+.mco input[type=radio],.mco input[type=checkbox]{margin-top:.18rem;accent-color:var(--gold);flex-shrink:0}
+.mco .ol{font-weight:700;color:var(--blue);margin-right:.1rem}
+.mco label.ok{background:var(--ok);border-color:var(--green)}
+.mco label.bad{background:var(--bad);border-color:var(--red)}
+.mco label.missed{background:var(--warn);border-color:var(--gold)}
+textarea.oi{width:100%;border:1.5px solid var(--border);background:var(--neutral);font-family:inherit;font-size:.9rem;padding:.5rem .65rem;color:var(--ink);resize:vertical;min-height:60px;margin-top:.3rem}
+textarea.oi:focus{outline:none;border-color:var(--gold)}
+.stem-prefix{font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.3rem}
+.fb{display:none;margin-top:.9rem;border-radius:2px;overflow:hidden}
+.fbh{padding:.45rem .8rem;font-weight:700;font-size:.8rem}
+.fbb{padding:.55rem .8rem;font-size:.78rem;line-height:1.6;border-top:1px solid rgba(0,0,0,.07)}
+.fbr{margin-bottom:.28rem;display:flex;gap:.4rem;align-items:baseline}
+.mdl{margin-top:.45rem;padding:.38rem .65rem;background:rgba(0,0,0,.04);border-left:3px solid;font-style:italic;font-size:.78rem}
+.ok .fbh{background:var(--ok);color:var(--green)}.ok .fbb{background:#f3fbf5}.ok .mdl{border-color:var(--green)}
+.pt .fbh{background:var(--warn);color:#7a5c00}.pt .fbb{background:#fffdf0}.pt .mdl{border-color:#c8a000}
+.no .fbh{background:var(--bad);color:var(--red)}.no .fbb{background:#fff5f5}.no .mdl{border-color:var(--red)}
+.bdg{display:inline-block;background:var(--ink);color:var(--gold2);font-size:.7rem;font-weight:700;padding:.07rem .38rem;margin-left:.28rem;vertical-align:middle}
+.vq{background:white;border:1px solid var(--border);padding:1rem 1.1rem;margin-bottom:1rem}
+.vql{font-family:'Playfair Display',serif;font-weight:700;font-size:.9rem;color:var(--blue);margin-bottom:.7rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+.vc{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.vw{list-style:none}
+.vw li{padding:.22rem 0;font-size:.84rem;display:flex;gap:.4rem}
+.vwn{font-weight:700;color:var(--blue);min-width:1.2rem}
+.vd{list-style:none}
+.vd li{display:flex;align-items:flex-start;gap:.55rem;margin-bottom:.7rem}
+.vi{width:2.2rem;min-width:2.2rem;height:1.9rem;border:2px solid var(--border);text-align:center;font-family:inherit;font-size:.9rem;font-weight:700;background:var(--neutral);color:var(--ink);flex-shrink:0}
+.vi:focus{outline:none;border-color:var(--gold)}
+.vi.vok{background:var(--ok);border-color:var(--green);color:var(--green)}
+.vi.vno{background:var(--bad);border-color:var(--red);color:var(--red)}
+.dt{font-size:.82rem;line-height:1.45;padding-top:.22rem}
+.sub-area{margin-top:2.5rem;background:var(--ink);padding:2rem;text-align:center}
+.sub-note{color:#ffaaaa;font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.sub-note2{color:#a09080;font-size:.82rem;margin-bottom:1.3rem}
+.sb{background:#e74c3c;color:white;font-family:'Playfair Display',serif;font-weight:900;font-size:1.15rem;letter-spacing:.08em;text-transform:uppercase;border:none;padding:.9rem 3rem;cursor:pointer;animation:pulse 1.8s infinite}
+.sb:hover{background:#c0392b}
+.sb:disabled{background:#555;animation:none;cursor:not-allowed}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(231,76,60,.5)}50%{box-shadow:0 0 0 12px rgba(231,76,60,0)}}
+.sc{display:none;background:white;border:3px solid var(--gold2);padding:2rem 1.8rem;margin-top:1.4rem;text-align:center}
+.sc h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900}
+.sn{font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:900;color:var(--gold2);line-height:1}
+.sd{font-size:.82rem;color:var(--muted);margin-top:.4rem}
+.sm{margin-top:.8rem;font-size:.92rem;color:var(--blue);font-style:italic}
+.hr{border:none;border-top:2px solid var(--border);margin:2rem 0}
+.overlay{display:none;position:fixed;inset:0;background:rgba(26,26,46,.88);z-index:1000;align-items:center;justify-content:center;flex-direction:column;gap:1rem;color:white;font-family:'Playfair Display',serif}
+.overlay.show{display:flex}
+.big-spin{width:50px;height:50px;border:4px solid rgba(255,255,255,.2);border-top-color:var(--gold2);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.overlay p{font-size:1.1rem;color:var(--gold2)}
+.overlay small{font-size:.8rem;color:#a09080}
+@media(max-width:580px){.vc{grid-template-columns:1fr}.info{flex-direction:column}.info .meta{margin-left:0}}
+</style>
+</head>
+<body>
+
+<div class="overlay" id="overlay">
+  <div class="big-spin"></div>
+  <p>Marking your answers…</p>
+  <small>Please wait — this may take a few seconds</small>
+</div>
+
+<div class="hdr">
+  <h1>MODULE E — <span>The Science of Sleep</span></h1>
+  <div class="gr"></div>
+  <p>12th Grade Practice &nbsp;|&nbsp; Teacher: Rinat Asoulin &nbsp;|&nbsp; 100 points</p>
+</div>
+
+<div class="info">
+  <label>Name: <input type="text" id="sname" placeholder="Your full name — required"/></label>
+  <label>ID: <input type="text" id="sid" placeholder="ID number — required" maxlength="9" inputmode="numeric"/></label>
+  <label>Class: <input type="text" id="sclass" placeholder="Class"/></label>
+  <div class="meta">Answer ALL questions<br/>then click Submit at the bottom</div>
+</div>
+
+<div id="modeBar" style="padding:0;border-bottom:4px solid #d4a017">
+  <div style="display:flex;flex-wrap:wrap">
+    <label id="labelPractice" style="flex:1;min-width:200px;display:flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 1.5rem;background:#1e6b3c;cursor:pointer;transition:background .2s;border-right:2px solid rgba(255,255,255,.15)">
+      <input type="radio" name="mode" value="practice" id="modePractice" checked style="accent-color:#d4a017;width:18px;height:18px"/>
+      <div>
+        <div style="color:#d4a017;font-family:'Playfair Display',serif;font-weight:900;font-size:1rem">🎯 PRACTICE MODE</div>
+        <div style="color:#a8d8b4;font-size:.76rem;margin-top:.15rem">Check your answers and learn — nothing is sent to the teacher</div>
+      </div>
+    </label>
+    <label id="labelExam" style="flex:1;min-width:200px;display:flex;align-items:center;justify-content:center;gap:.7rem;padding:1rem 1.5rem;background:#555;cursor:pointer;transition:background .2s">
+      <input type="radio" name="mode" value="exam" id="modeExam" style="accent-color:#e74c3c;width:18px;height:18px"/>
+      <div>
+        <div style="color:#ffcccc;font-family:'Playfair Display',serif;font-weight:900;font-size:1rem">📋 REAL EXAM MODE</div>
+        <div style="color:#ccc;font-size:.76rem;margin-top:.15rem">Results are sent to your teacher — submit only once!</div>
+      </div>
+    </label>
+  </div>
+  <div id="activeBanner" style="background:#1e6b3c;color:white;text-align:center;padding:.55rem 1rem;font-family:'Playfair Display',serif;font-weight:700;font-size:.9rem;letter-spacing:.03em">
+    🎯 You are in PRACTICE MODE — your answers will NOT be sent to the teacher
+  </div>
+</div>
+<div class="main">
+
+<div class="ph"><h2>PART I — WRITTEN RECEPTION &nbsp;(70 points)</h2><p>Read the article carefully and answer questions 1–9. Feedback appears after you submit.</p></div>
+
+<div class="art">
+  <div class="at">THE SCIENCE OF SLEEP</div>
+
+  <p><span class="pl2">I</span>Scientists have long recognized that sleep is one of the most essential human needs. Yet in today's fast-paced world, millions of people — particularly teenagers — suffer from serious sleep <u class="g" title="lack of something needed">deprivation<sup>1</sup></u>. Research shows that lack of rest affects concentration, emotional stability, and physical health. Despite growing concern about this issue, the number of people sleeping fewer than seven hours a night continues to rise.</p>
+
+  <p><span class="pl2">II</span>Studies have identified several important benefits of quality sleep. First, sleep allows the brain to organize and store <u class="g" title="related to thinking and learning">cognitive<sup>2</sup></u> information learned throughout the day. In addition, the body uses this time to repair cells and strengthen the <u class="g" title="protected against illness">immune<sup>3</sup></u> system. However, experts point out that modern lifestyles frequently disrupt these natural processes, preventing many people from gaining their full benefits.</p>
+
+  <p><span class="pl2">III</span>Among the biggest challenges to healthy sleep is the use of digital screens. Devices such as phones and computers <u class="g" title="to produce or send out">emit<sup>4</sup></u> a type of light that keeps the brain <u class="g" title="awake and paying attention">alert<sup>5</sup></u> long after bedtime. Dr. Maya Cohen, a sleep researcher at the University of Haifa, argues that the considerable delay between screen exposure and sleep <u class="g" title="the beginning of something">onset<sup>6</sup></u> is largely underestimated by both parents and educators. In schools where phone use was restricted before bedtime, students reported sleeping significantly better.</p>
+
+  <p><span class="pl2">IV</span>Good sleep also produces important social benefits. Students who sleep well demonstrate greater flexibility in problem-solving and stronger emotional resilience. Some schools in Finland and the United States have responded by shifting their start times to later in the morning. Experts argue that such institutional changes can help young people escape the damaging cycle of sleep deprivation.</p>
+
+  <p><span class="pl2">V</span>Scientists believe that sleep research will continue to expand. Although technology alone cannot completely solve the problem, it can contribute to developing more efficient solutions. If governments, schools, and families work together to establish healthier daily routines, sleep deprivation may gradually become a consequence of the past rather than a challenge of the present.</p>
+
+  <div class="glos"><h4>GLOSSARY</h4><ul>
+    <li><strong>1. deprivation</strong> — lack of something needed</li>
+    <li><strong>2. cognitive</strong> — related to thinking and learning</li>
+    <li><strong>3. immune</strong> — protected against illness</li>
+    <li><strong>4. emit</strong> — to produce or send out</li>
+    <li><strong>5. alert</strong> — awake and paying attention</li>
+    <li><strong>6. onset</strong> — the beginning of something</li>
+  </ul></div>
+</div>
+
+<hr class="hr"/>
+
+<!-- Q1: MC function of Para I — 8pts -->
+<div class="qb" id="qb1">
+  <div class="qn">Question 1 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">What is the main function of paragraph I?</div>
+  <div class="qi">Circle the correct answer.</div>
+  <ul class="mco" id="q1o">
+    <li><label><input type="radio" name="q1" value="i"/><span class="ol">i)</span>To present the solutions scientists have found for sleep problems.</label></li>
+    <li><label><input type="radio" name="q1" value="ii"/><span class="ol">ii)</span>To introduce the widespread problem of insufficient sleep.</label></li>
+    <li><label><input type="radio" name="q1" value="iii"/><span class="ol">iii)</span>To explain what happens to the brain during the night.</label></li>
+    <li><label><input type="radio" name="q1" value="iv"/><span class="ol">iv)</span>To compare sleeping habits in different countries.</label></li>
+  </ul>
+  <div class="fb" id="q1f"></div>
+</div>
+
+<!-- Q2: Complete sentence — Para II brain — 8pts -->
+<div class="qb" id="qb2">
+  <div class="qn">Question 2 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">Complete the sentence according to paragraph II.</div>
+  <div class="qi">Complete the sentence.</div>
+  <div class="stem-prefix">Sleep allows the brain to</div>
+  <textarea class="oi" id="q2a" placeholder="Continue the sentence…"></textarea>
+  <div class="fb" id="q2f"></div>
+</div>
+
+<!-- Q3: MC function of Para III — 8pts -->
+<div class="qb" id="qb3">
+  <div class="qn">Question 3 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">What do we learn from paragraph III?</div>
+  <div class="qi">Circle the correct answer.</div>
+  <ul class="mco" id="q3o">
+    <li><label><input type="radio" name="q3" value="i"/><span class="ol">i)</span>Screens have no effect on sleep quality.</label></li>
+    <li><label><input type="radio" name="q3" value="ii"/><span class="ol">ii)</span>Screen light helps the brain relax before sleep.</label></li>
+    <li><label><input type="radio" name="q3" value="iii"/><span class="ol">iii)</span>Screen use delays sleep and this fact is often not taken seriously enough.</label></li>
+    <li><label><input type="radio" name="q3" value="iv"/><span class="ol">iv)</span>Only schools can solve the problem of screen use at night.</label></li>
+  </ul>
+  <div class="fb" id="q3f"></div>
+</div>
+
+<!-- Q4: Complete sentence inference — Para III parents — 8pts -->
+<div class="qb" id="qb4">
+  <div class="qn">Question 4 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">Complete the sentence according to paragraph III.</div>
+  <div class="qi">Complete the sentence.</div>
+  <div class="stem-prefix">According to Dr. Cohen, both parents and educators largely do not realize</div>
+  <textarea class="oi" id="q4a" placeholder="Continue the sentence…"></textarea>
+  <div class="fb" id="q4f"></div>
+</div>
+
+<!-- Q5: Complete sentence — Para III schools — 8pts -->
+<div class="qb" id="qb5">
+  <div class="qn">Question 5 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">Complete the sentence according to paragraph III.</div>
+  <div class="qi">Complete the sentence.</div>
+  <div class="stem-prefix">In schools where phone use was restricted before bedtime,</div>
+  <textarea class="oi" id="q5a" placeholder="Continue the sentence…"></textarea>
+  <div class="fb" id="q5f"></div>
+</div>
+
+<!-- Q6: MC communicative purpose expert — 7pts -->
+<div class="qb" id="qb6">
+  <div class="qn">Question 6 <span class="qpts">(7 points)</span></div>
+  <div class="qstem">What does Dr. Maya Cohen mainly argue in paragraph III?</div>
+  <div class="qi">Circle the correct answer.</div>
+  <ul class="mco" id="q6o">
+    <li><label><input type="radio" name="q6" value="i"/><span class="ol">i)</span>Students should never use phones.</label></li>
+    <li><label><input type="radio" name="q6" value="ii"/><span class="ol">ii)</span>The delay screens cause before sleep is more serious than most people think.</label></li>
+    <li><label><input type="radio" name="q6" value="iii"/><span class="ol">iii)</span>Parents are to blame for teenagers' poor sleep.</label></li>
+    <li><label><input type="radio" name="q6" value="iv"/><span class="ol">iv)</span>Schools should ban all digital devices.</label></li>
+  </ul>
+  <div class="fb" id="q6f"></div>
+</div>
+
+<!-- Q7: MC inference Para IV — 8pts -->
+<div class="qb" id="qb7">
+  <div class="qn">Question 7 <span class="qpts">(8 points)</span></div>
+  <div class="qstem">What can we understand from paragraph IV?</div>
+  <div class="qi">Circle the correct answer.</div>
+  <ul class="mco" id="q7o">
+    <li><label><input type="radio" name="q7" value="i"/><span class="ol">i)</span>Only students in Finland and the USA suffer from sleep deprivation.</label></li>
+    <li><label><input type="radio" name="q7" value="ii"/><span class="ol">ii)</span>Changing school schedules can help improve students' sleep and wellbeing.</label></li>
+    <li><label><input type="radio" name="q7" value="iii"/><span class="ol">iii)</span>Students who sleep well always achieve the highest grades.</label></li>
+    <li><label><input type="radio" name="q7" value="iv"/><span class="ol">iv)</span>Emotional resilience has no connection to sleep.</label></li>
+  </ul>
+  <div class="fb" id="q7f"></div>
+</div>
+
+<!-- Q8: Simple factual — 7pts -->
+<div class="qb" id="qb8">
+  <div class="qn">Question 8 <span class="qpts">(7 points)</span></div>
+  <div class="qstem">Where does Dr. Maya Cohen work?</div>
+  <div class="qi">Answer:</div>
+  <textarea class="oi" id="q8a" rows="2" placeholder="Write your answer here…"></textarea>
+  <div class="fb" id="q8f"></div>
+</div>
+
+<!-- Q9: MC main message Para V — 7pts -->
+<div class="qb" id="qb9">
+  <div class="qn">Question 9 <span class="qpts">(7 points)</span></div>
+  <div class="qstem">What is the main message of paragraph V?</div>
+  <div class="qi">Circle the correct answer.</div>
+  <ul class="mco" id="q9o">
+    <li><label><input type="radio" name="q9" value="i"/><span class="ol">i)</span>Technology will completely eliminate sleep deprivation.</label></li>
+    <li><label><input type="radio" name="q9" value="ii"/><span class="ol">ii)</span>Sleep research has reached its limits.</label></li>
+    <li><label><input type="radio" name="q9" value="iii"/><span class="ol">iii)</span>Cooperation between governments, schools, and families can help solve the sleep crisis.</label></li>
+    <li><label><input type="radio" name="q9" value="iv"/><span class="ol">iv)</span>Only governments can reduce sleep deprivation.</label></li>
+  </ul>
+  <div class="fb" id="q9f"></div>
+</div>
+
+<!-- PART II -->
+<div class="ph" style="margin-top:2.5rem"><h2>PART II — LEXICAL KNOWLEDGE &nbsp;(30 points)</h2><p>Match THREE words from Column A to the definitions in Column B. Write the number in the box. Three words will not be used. (2 points each.)</p></div>
+
+<!-- Q10: List A — challenge(1), concern(2), consequence(3), considerable(4), efficient(5), flexible(6)
+     Answers: result/effect=3, able to change=6, very large=4 -->
+<div class="vq" id="qbv10">
+  <div class="vql">(10) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw">
+      <li><span class="vwn">1.</span>challenge</li>
+      <li><span class="vwn">2.</span>concern</li>
+      <li><span class="vwn">3.</span>consequence</li>
+      <li><span class="vwn">4.</span>considerable</li>
+      <li><span class="vwn">5.</span>efficient</li>
+      <li><span class="vwn">6.</span>flexible</li>
+    </ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v10a" maxlength="1" placeholder="?"/><span class="dt">the result or effect of an action</span></li>
+      <li><input type="text" class="vi" id="v10b" maxlength="1" placeholder="?"/><span class="dt">able to change or adapt easily</span></li>
+      <li><input type="text" class="vi" id="v10c" maxlength="1" placeholder="?"/><span class="dt">large in size or amount</span></li>
+    </ul>
+  </div>
+  <div class="fb" id="v10f"></div>
+</div>
+
+<!-- Q11: List B — apparent(1), appropriate(2), emerge(3), genuine(4), logical(5), potential(6)
+     Answers: come out/become known=3, suitable=2, possible and likely=6 -->
+<div class="vq" id="qbv11">
+  <div class="vql">(11) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw">
+      <li><span class="vwn">1.</span>apparent</li>
+      <li><span class="vwn">2.</span>appropriate</li>
+      <li><span class="vwn">3.</span>emerge</li>
+      <li><span class="vwn">4.</span>genuine</li>
+      <li><span class="vwn">5.</span>logical</li>
+      <li><span class="vwn">6.</span>potential</li>
+    </ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v11a" maxlength="1" placeholder="?"/><span class="dt">to come out or become known</span></li>
+      <li><input type="text" class="vi" id="v11b" maxlength="1" placeholder="?"/><span class="dt">suitable or correct for a situation</span></li>
+      <li><input type="text" class="vi" id="v11c" maxlength="1" placeholder="?"/><span class="dt">possible and likely to develop</span></li>
+    </ul>
+  </div>
+  <div class="fb" id="v11f"></div>
+</div>
+
+<!-- Q12: List C — awareness(1), barrier(2), capacity(3), courage(4), grateful(5), modest(6)
+     Answers: stops progress=2, thankful=5, knowledge of something=1 -->
+<div class="vq" id="qbv12">
+  <div class="vql">(12) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw">
+      <li><span class="vwn">1.</span>awareness</li>
+      <li><span class="vwn">2.</span>barrier</li>
+      <li><span class="vwn">3.</span>capacity</li>
+      <li><span class="vwn">4.</span>courage</li>
+      <li><span class="vwn">5.</span>grateful</li>
+      <li><span class="vwn">6.</span>modest</li>
+    </ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v12a" maxlength="1" placeholder="?"/><span class="dt">something that prevents progress</span></li>
+      <li><input type="text" class="vi" id="v12b" maxlength="1" placeholder="?"/><span class="dt">thankful for something received</span></li>
+      <li><input type="text" class="vi" id="v12c" maxlength="1" placeholder="?"/><span class="dt">knowledge or understanding of something</span></li>
+    </ul>
+  </div>
+  <div class="fb" id="v12f"></div>
+</div>
+
+<!-- Q13: List C — absorb(1), access(2), cure(3), dedicate(4), disturb(5), escape(6)
+     Answers: take in=1, give time to=4, interrupt=5 -->
+<div class="vq" id="qbv13">
+  <div class="vql">(13) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw">
+      <li><span class="vwn">1.</span>absorb</li>
+      <li><span class="vwn">2.</span>access</li>
+      <li><span class="vwn">3.</span>cure</li>
+      <li><span class="vwn">4.</span>dedicate</li>
+      <li><span class="vwn">5.</span>disturb</li>
+      <li><span class="vwn">6.</span>escape</li>
+    </ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v13a" maxlength="1" placeholder="?"/><span class="dt">to take in or soak up completely</span></li>
+      <li><input type="text" class="vi" id="v13b" maxlength="1" placeholder="?"/><span class="dt">to give time or effort to a purpose</span></li>
+      <li><input type="text" class="vi" id="v13c" maxlength="1" placeholder="?"/><span class="dt">to interrupt or cause problems for</span></li>
+    </ul>
+  </div>
+  <div class="fb" id="v13f"></div>
+</div>
+
+<!-- Q14: Lists A+B phrasal — focus on(1), get rid of(2), keep on(3), run out of(4), set up(5), take part(6)
+     Answers: have no more=4, organize=5, join in=6 -->
+<div class="vq" id="qbv14">
+  <div class="vql">(14) <span style="font-weight:400;font-size:.75rem;color:var(--muted)">(6 points)</span></div>
+  <div class="vc">
+    <ul class="vw">
+      <li><span class="vwn">1.</span>focus on</li>
+      <li><span class="vwn">2.</span>get rid of</li>
+      <li><span class="vwn">3.</span>keep on</li>
+      <li><span class="vwn">4.</span>run out of</li>
+      <li><span class="vwn">5.</span>set up</li>
+      <li><span class="vwn">6.</span>take part</li>
+    </ul>
+    <ul class="vd">
+      <li><input type="text" class="vi" id="v14a" maxlength="1" placeholder="?"/><span class="dt">to have no more of something</span></li>
+      <li><input type="text" class="vi" id="v14b" maxlength="1" placeholder="?"/><span class="dt">to organize or establish something</span></li>
+      <li><input type="text" class="vi" id="v14c" maxlength="1" placeholder="?"/><span class="dt">to join in an activity</span></li>
+    </ul>
+  </div>
+  <div class="fb" id="v14f"></div>
+</div>
+
+<!-- SUBMIT -->
+<div class="sub-area">
+  <div class="sub-note" id="subNote">🎯 Click below to check all your answers and see your score!</div>
+  <div class="sub-note2">Do not close the page until you see the green confirmation message.</div>
+  <button class="sb" id="submitBtn" onclick="submitAll()">🎯 Check Answers &amp; See My Score</button>
+  <div class="sc" id="sc">
+    <h2>Your Result</h2>
+    <div class="sn" id="sn">—</div>
+    <div class="sd" id="sd"></div>
+    <div class="sm" id="sm"></div>
+    <div id="sendstatus" style="margin-top:1rem;display:none"></div>
+  </div>
+</div>
+</div>
+
+<script>
+// Update UI based on mode selection
+function updateModeUI(isPractice){
+  document.getElementById('labelPractice').style.background=isPractice?'#1e6b3c':'#2d4a2d';
+  document.getElementById('labelExam').style.background=isPractice?'#555':'#8b1a1a';
+  document.getElementById('activeBanner').style.background=isPractice?'#1e6b3c':'#c0392b';
+  document.getElementById('activeBanner').textContent=isPractice?
+    '🎯 You are in PRACTICE MODE — your answers will NOT be sent to the teacher':
+    '📋 You are in REAL EXAM MODE — your results WILL be sent to the teacher';
+  document.getElementById('subNote').innerHTML=isPractice?
+    '🎯 Click below to check all your answers and see your score!':
+    '⚠️ Real Exam — click below to submit ONCE and send results to your teacher!';
+  document.getElementById('submitBtn').style.background=isPractice?'#1e6b3c':'#e74c3c';
+  document.getElementById('submitBtn').textContent=isPractice?'🎯 Check Answers & See My Score':'📤 Submit & Send to Teacher';
+}
+document.querySelectorAll('input[name=mode]').forEach(r=>r.addEventListener('change',function(){
+  updateModeUI(this.value==='practice');
+}));
+updateModeUI(true);
+
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYkJy7Yi4pcL4BlrsCQwyYVMrm9-XlaN0FCiBq3GtjJjwdhywAAzXSrTXB6fhDBzSX/exec';
+const scores = {}, answers = {};
+let submitted = false;
+
+function bdg(n){return `<span class="bdg">${n}</span>`;}
+function showFb(id,type,hdr,rows,model){
+  const el=document.getElementById(id);
+  const mdl=model?`<div class="mdl">✎ Model answer: ${model}</div>`:'';
+  el.className='fb '+type;
+  el.innerHTML=`<div class="fbh">${hdr}</div><div class="fbb">${rows.map(r=>`<div class="fbr"><span>${r.i}</span><span>${r.t}</span></div>`).join('')}${mdl}</div>`;
+  el.style.display='block';
+}
+
+function markMC(qId, correct, pts){
+  const opts=document.querySelectorAll(`#${qId}o input`);
+  let chosen=null; opts.forEach(r=>{if(r.checked)chosen=r.value;});
+  opts.forEach(r=>{r.disabled=true;if(r.value===correct)r.parentElement.classList.add('ok');if(r.checked&&r.value!==correct)r.parentElement.classList.add('bad');});
+  const ok=chosen===correct; scores[qId]=ok?pts:0;
+  answers[qId]=ok?'✅ '+chosen+') '+pts+'pts':'❌ (chose '+(chosen||'nothing')+') 0pts';
+  if(ok) showFb(qId+'f','ok',`✓ Correct! ${bdg('+'+pts+' pts')}`,[{i:'✅',t:'That is the right answer.'}],null);
+  else showFb(qId+'f','no',`✗ Incorrect ${bdg('0 pts')}`,[
+    {i:'❌',t:`You chose <strong>${chosen||'nothing'}</strong>. Correct answer: <strong>${correct})</strong>.`},
+    {i:'📖',t:'Re-read the paragraph carefully.'}
+  ],null);
+}
+
+async function markOpen(qId, pts, aiPrompt, model){
+  const el=document.getElementById(qId+'a');
+  const inp=(el?el.value:'').trim();
+  if(el)el.disabled=true;
+  if(!inp){scores[qId]=0;answers[qId]='(no answer)';showFb(qId+'f','no',`✗ No answer ${bdg('0 pts')}`,[{i:'❌',t:'No answer was provided.'}],model);return;}
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      model:'claude-sonnet-4-20250514',max_tokens:220,
+      messages:[{role:'user',content:aiPrompt+'\n\nSTUDENT ANSWER: "'+inp+'"\n\nReply ONLY with JSON: {"correct":true,"grammar_penalty":0,"reason":"one sentence","tip":"one short tip"}'}]
+    })});
+    const data=await res.json();
+    let r; try{r=JSON.parse(data.content[0].text.trim());}catch(e){r={correct:true,grammar_penalty:0,reason:'Recorded.',tip:'Good effort!'};}
+    const ok=r.correct===true, gp=ok?(r.grammar_penalty||0):0, earned=ok?Math.max(0,pts-gp):0;
+    scores[qId]=earned; answers[qId]=(ok?'✅':'❌')+' '+earned+'pts | '+inp.substring(0,80);
+    if(ok&&!gp) showFb(qId+'f','ok',`✓ Correct! ${bdg('+'+pts+' pts')}`,[{i:'✅',t:r.tip||'Well done!'},{i:'📝',t:r.reason}],null);
+    else if(ok&&gp) showFb(qId+'f','pt',`Correct content — grammar deduction ${bdg('+'+earned+'/'+pts+' pts')}`,[{i:'✅',t:'Correct information.'},{i:'📝',t:'Grammar mistake: −2. '+r.reason},{i:'💡',t:r.tip}],null);
+    else showFb(qId+'f','no',`✗ Incorrect ${bdg('0 pts')}`,[{i:'❌',t:r.reason||'The specific content from the text is missing.'},{i:'📖',t:'Re-read the paragraph carefully.'}],model);
+  }catch(e){
+    scores[qId]=pts; answers[qId]='auto '+pts+'pts | '+inp.substring(0,80);
+    showFb(qId+'f','ok',`Answer recorded ${bdg(pts+' pts')}`,[{i:'📝',t:'Saved.'},{i:'✎',t:'Compare with model answer.'}],model);
+  }
+}
+
+function markVoc(qN, correct){
+  const ids=['a','b','c'], vals=ids.map(x=>document.getElementById('v'+qN+x).value.trim());
+  let earned=0; const rows=[];
+  correct.forEach((ans,i)=>{
+    const inp=document.getElementById('v'+qN+ids[i]), ok=vals[i]===ans;
+    inp.disabled=true; inp.className='vi '+(ok?'vok':'vno');
+    if(ok){earned+=2;rows.push({i:'✅',t:'Box '+(i+1)+': <strong>'+vals[i]+'</strong> — correct (+2)'});}
+    else rows.push({i:'❌',t:'Box '+(i+1)+': <strong>'+(vals[i]||'?')+'</strong> — incorrect. Correct answer: <strong>'+ans+'</strong>'});
+  });
+  scores['v'+qN]=earned; answers['v'+qN]=earned+'/6 ('+vals.join(',')+')';
+  const type=earned===6?'ok':earned>0?'pt':'no';
+  showFb('v'+qN+'f',type,
+    earned===6?'✓ Perfect! '+bdg('6/6'):earned>0?(earned/2)+' of 3 correct '+bdg(earned+'/6'):'✗ No correct matches '+bdg('0/6'),
+    rows,null);
+}
+
+async function submitAll(){
+  if(submitted) return;
+  const sname=document.getElementById('sname').value.trim();
+  const sid=document.getElementById('sid').value.trim();
+  const isPractice=document.getElementById('modePractice').checked;
+  if(!sname){
+    document.getElementById('sname').classList.add('error');
+    document.getElementById('sname').focus();
+    alert('⚠️ Please write your full name before submitting!');
+    return;
+  }
+  if(!isPractice&&!sid){
+    document.getElementById('sid').classList.add('error');
+    document.getElementById('sid').focus();
+    alert('⚠️ Please write your ID number before submitting!');
+    return;
+  }
+  if(!isPractice) submitted=true;
+  if(!isPractice) document.getElementById('submitBtn').disabled=true;
+  document.getElementById('submitBtn').textContent='⏳ Marking…';
+  document.getElementById('overlay').classList.add('show');
+  document.querySelectorAll('textarea.oi,input[type=radio],input[type=checkbox],input.vi').forEach(el=>el.disabled=true);
+
+  // ── MARK ALL ──────────────────────────────────────────────────────────
+
+  // Q1: MC function of Para I
+  markMC('q1','ii',8);
+
+  // Q2: Brain organizes and stores information — TIGHT marking
+  await markOpen('q2',8,
+    `You are marking a Bagrut English exam. Sentence stem: "Sleep allows the brain to ___"
+The text says: "sleep allows the brain to organize and store cognitive information learned throughout the day."
+ACCEPTABLE ANSWERS (these are the ONLY ideas to accept):
+- organize and store information (learned during the day)
+- process and store information from the day
+- sort out / organize what was learned throughout the day
+REJECT these as too vague:
+- "rest" / "think" / "work" / "function" — no specific content
+- "help the body" — wrong paragraph, wrong idea
+- Any answer that does not mention organizing/processing/storing information
+MARKING: Spelling=IGNORE. Capitalization=IGNORE. Grammar mistake=grammar_penalty:2. Different phrasing=OK ONLY if organizing/storing/processing information is clearly present.`,
+    'organize and store information learned throughout the day');
+
+  // Q3: MC what do we learn from Para III
+  markMC('q3','iii',8);
+
+  // Q4: Parents/educators underestimate delay — TIGHT marking
+  await markOpen('q4',8,
+    `You are marking a Bagrut English exam. Sentence stem: "According to Dr. Cohen, both parents and educators largely do not realize ___"
+The text says: "the considerable delay between screen exposure and sleep onset is largely underestimated by both parents and educators."
+ACCEPTABLE ANSWERS (these are the ONLY ideas to accept):
+- how much screens delay sleep / sleep onset
+- that there is a considerable delay between using screens and falling asleep
+- how long it takes to fall asleep after screen exposure
+- that the delay caused by screens before sleep is very significant / considerable
+REJECT these as too vague or wrong:
+- "that screens are harmful/bad/dangerous" — too general, not the specific point
+- "that students use phones" — irrelevant
+- "that sleep is important" — wrong direction
+- Any answer that does not mention the DELAY between screens and sleep
+MARKING: Spelling=IGNORE. Capitalization=IGNORE. Grammar mistake=grammar_penalty:2. The word "delay" or equivalent (time gap, how long it takes) MUST be present or implied.`,
+    'how much screen exposure delays sleep onset (the delay between using screens and falling asleep)');
+
+  // Q5: Schools restricted phones — students slept better — TIGHT marking
+  await markOpen('q5',8,
+    `You are marking a Bagrut English exam. Sentence stem: "In schools where phone use was restricted before bedtime, ___"
+The text says: "students reported sleeping significantly better."
+ACCEPTABLE ANSWERS (these are the ONLY ideas to accept):
+- students slept significantly/much better
+- students reported sleeping better / improved sleep
+- sleep quality improved (significantly)
+REJECT these as wrong or not in text:
+- "students were happier" — not stated in text
+- "students did better at school / got better grades" — not stated
+- "teachers were satisfied" — not in text
+- "phones were taken away" — describes the condition already given in the stem
+- Any answer that does not mention students sleeping BETTER
+MARKING: Spelling=IGNORE. Capitalization=IGNORE. Grammar mistake=grammar_penalty:2. The idea of BETTER SLEEP must be present.`,
+    'students reported sleeping significantly better');
+
+  // Q6: MC what does Dr. Cohen argue
+  markMC('q6','ii',7);
+
+  // Q7: MC inference Para IV
+  markMC('q7','ii',8);
+
+  // Q8: Where does Dr. Cohen work — TIGHT marking
+  await markOpen('q8',7,
+    `You are marking a Bagrut English exam. Question: "Where does Dr. Maya Cohen work?"
+The text states: "Dr. Maya Cohen, a sleep researcher at the University of Haifa"
+ACCEPTABLE ANSWERS:
+- (the) University of Haifa
+- Haifa University
+REJECT:
+- "a university in Israel" — not specific enough, must name Haifa
+- "a research center" — wrong
+- "a school" — wrong
+- Any answer that does not specifically say "Haifa"
+MARKING: Spelling=IGNORE (accept Haifa/Xaifa type variants if clearly Haifa). Capitalization=IGNORE. Grammar=grammar_penalty:2 only if content is correct. Wrong or vague location=correct:false.`,
+    'the University of Haifa');
+
+  // Q9: MC main message Para V
+  markMC('q9','iii',7);
+
+  // Vocab
+  markVoc(10,['3','6','4']);
+  markVoc(11,['3','2','6']);
+  markVoc(12,['2','5','1']);
+  markVoc(13,['1','4','5']);
+  markVoc(14,['4','5','6']);
+
+  // ── CALCULATE SCORE ───────────────────────────────────────────────────
+  let tot=0,r=0,v=0;
+  Object.entries(scores).forEach(([k,val])=>{tot+=val; k.startsWith('v')?v+=val:r+=val;});
+  tot=Math.round(tot); r=Math.round(r); v=Math.round(v);
+
+  document.getElementById('overlay').classList.remove('show');
+  document.getElementById('submitBtn').textContent='✅ Submitted';
+
+  const panel=document.getElementById('sc'); panel.style.display='block';
+  document.getElementById('sn').textContent=tot+' / 100';
+  document.getElementById('sd').textContent='Reading: '+r+' / 70  |  Vocabulary: '+v+' / 30';
+  document.getElementById('sm').textContent=
+    tot>=90?'Excellent work! You are very well prepared for the Bagrut.':
+    tot>=75?'Good job! Review the feedback next to each question.':
+    tot>=55?'Keep practising — read the paragraphs carefully.':
+    'Go over the text and feedback again with your teacher.';
+  panel.scrollIntoView({behavior:'smooth',block:'center'});
+
+  // ── SEND TO SHEET ─────────────────────────────────────────────────────
+  const sclass=document.getElementById('sclass').value.trim()||'(no class)';
+  const sd=document.getElementById('sendstatus'); sd.style.display='block';
+  if(isPractice){
+    sd.style.display='block';
+    const msg = tot>=90?
+      '🌟 Outstanding! '+tot+'/100 — you are really well prepared! Check the feedback next to each question to see what you got right.':
+      tot>=75?
+      '👏 Great work! '+tot+'/100 — you are doing well! Look at the feedback below to see what to review.':
+      tot>=55?
+      '💪 Good effort! '+tot+'/100 — keep practising! Read the feedback carefully and try to understand where you lost points.':
+      '📚 Keep going! '+tot+'/100 — don\'t give up! Read the article again and look at the model answers in the feedback. You can do this! 😊';
+    sd.innerHTML="<div style='background:#eaf6ee;border:2px solid #1e6b3c;padding:1rem 1.2rem;border-radius:3px;text-align:left'>"
+      +"<div style='font-family:Playfair Display,serif;font-weight:900;color:#1e6b3c;font-size:1rem;margin-bottom:.4rem'>🎯 Practice Session Complete!</div>"
+      +"<div style='font-size:.88rem;color:#1a1a2e;line-height:1.6'>"+msg+"</div>"
+      +"<div style='font-size:.78rem;color:#6b6050;margin-top:.6rem'>📌 This was practice — nothing was sent to your teacher. When you are ready for the real exam, switch to 📋 <strong>Real Exam Mode</strong>.</div>"
+      +"</div>";
+    return;
+  }
+  sd.innerHTML='<span style="color:#a09080;font-size:.8rem">📤 Sending results to teacher…</span>';
+  try{
+    await fetch(SCRIPT_URL, {
+      method:'POST',
+      mode:'no-cors',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        exam:'sleep', name:sname, id:sid, class:sclass,
+        total:tot, reading:r, vocab:v,
+        q1:answers.q1||'—', q2:answers.q2||'—', q3:answers.q3||'—',
+        q4:answers.q4||'—', q5:answers.q5||'—', q6:answers.q6||'—',
+        q7:answers.q7||'—', q8:answers.q8||'—', q9:answers.q9||'—',
+        v10:answers.v10||'—', v11:answers.v11||'—', v12:answers.v12||'—',
+        v13:answers.v13||'—', v14:answers.v14||'—'
+      })
+    });
+    sd.innerHTML='<span style="color:#1e6b3c;font-size:.88rem;font-weight:600">✅ Results sent to your teacher!</span>';
+  }catch(err){
+    sd.innerHTML='<span style="color:#c0392b;font-size:.8rem">⚠️ Could not send. Tell your teacher your score: <strong>'+tot+'/100</strong></span>';
+  }
+}
+</script>
+</body>
+</html>
