@@ -1,454 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Learning in Times of War — Reading Comprehension</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module E Test</title>
+
 <style>
-:root{--ink:#1a1a2e;--paper:#faf8f3;--cream:#f0ece0;--gold:#b8860b;--gold2:#d4a017;--red:#c0392b;--green:#1e6b3c;--blue:#1a3a5c;--muted:#6b6050;--border:#d4c9b0;--neutral:#f5f2eb;--ok:#eaf6ee;--bad:#fdecea;--warn:#fff8e1}
-*{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--paper);color:var(--ink);font-family:'Source Serif 4',Georgia,serif;font-size:16px;line-height:1.75}
-.hdr{background:var(--ink);color:var(--paper);padding:1.8rem 2rem;text-align:center;position:relative;overflow:hidden}
-.hdr::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 40px,rgba(184,134,11,.06) 40px,rgba(184,134,11,.06) 41px)}
-.hdr h1{font-family:'Playfair Display',serif;font-size:clamp(1.3rem,3.5vw,2rem);font-weight:900;position:relative}
-.hdr h1 span{color:var(--gold2)}
-.hdr p{font-size:.82rem;color:#c0b898;font-style:italic;margin-top:.35rem;position:relative}
-.gr{width:60px;height:2px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);margin:.7rem auto}
-.info{background:var(--cream);border-bottom:2px solid var(--border);padding:.9rem 2rem;display:flex;flex-wrap:wrap;gap:.9rem;align-items:center}
-.info label{font-size:.82rem;color:var(--muted);font-weight:600}
-.info input{border:none;border-bottom:2px solid var(--border);background:transparent;font-family:inherit;font-size:.9rem;padding:.15rem .35rem;color:var(--ink);width:140px}
-.info input:focus{outline:none;border-color:var(--gold)}
-.info .meta{margin-left:auto;font-size:.76rem;color:var(--muted);text-align:right;line-height:1.4}
-.prog{background:var(--cream);border-bottom:1px solid var(--border);padding:.45rem 2rem;display:flex;align-items:center;gap:.8rem;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.08)}
-.pb{flex:1;height:5px;background:var(--border);border-radius:3px;overflow:hidden}
-.pf{height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:3px;transition:width .4s}
-.pl{font-size:.7rem;color:var(--muted);white-space:nowrap}
-.main{max-width:860px;margin:0 auto;padding:1.8rem 2rem 4rem}
-.art{background:white;border:1px solid var(--border);padding:1.6rem 2rem;margin-bottom:1.4rem;box-shadow:0 2px 12px rgba(0,0,0,.05)}
-.at{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:900;text-align:center;letter-spacing:.06em;margin-bottom:.9rem;padding-bottom:.6rem;border-bottom:2px solid var(--border)}
-.art p{margin-bottom:.8rem;text-align:justify;font-size:.93rem}
-.art p strong{color:var(--blue)}
-sup{font-size:.58em;color:var(--gold);font-weight:700}
-.glos{background:var(--neutral);border:1px solid var(--border);padding:.9rem 1.2rem;margin-top:.8rem;border-left:4px solid var(--gold)}
-.glos h4{font-family:'Playfair Display',serif;font-size:.88rem;margin-bottom:.5rem;letter-spacing:.04em;color:var(--blue)}
-.glos li{font-size:.82rem;margin-bottom:.3rem;list-style:none;padding-left:.2rem}
-.glos li strong{color:var(--ink)}
-.ph{margin:2rem 0 1.1rem;padding:.8rem 1.1rem;background:var(--ink);color:var(--paper);border-left:4px solid var(--gold2);font-family:'Playfair Display',serif}
-.ph h2{font-size:1rem;font-weight:700;letter-spacing:.04em}
-.ph p{font-size:.76rem;color:#a09080;margin-top:.2rem}
-.instr{background:var(--neutral);border:1px solid var(--border);border-left:4px solid var(--gold);padding:.7rem 1rem;font-size:.82rem;color:var(--muted);margin-bottom:1.1rem;line-height:1.55}
-.qb{background:white;border:1px solid var(--border);padding:1.2rem 1.3rem;margin-bottom:1rem}
-.qb:focus-within{box-shadow:0 0 0 2px rgba(184,134,11,.2)}
-.qn{display:inline-block;background:var(--ink);color:var(--gold2);font-family:'Playfair Display',serif;font-weight:700;font-size:.76rem;padding:.1rem .45rem;margin-bottom:.55rem}
-.qpts{float:right;font-size:.7rem;color:var(--muted);font-style:italic;padding-top:.1rem}
-.qstem{font-size:.92rem;margin-bottom:.65rem}
-.qi{font-size:.74rem;font-weight:600;color:var(--blue);margin-bottom:.55rem;text-transform:uppercase;letter-spacing:.04em}
-.mco{list-style:none}
-.mco li{margin-bottom:.38rem}
-.mco label{display:flex;align-items:flex-start;gap:.55rem;cursor:pointer;padding:.42rem .65rem;border:1.5px solid var(--border);font-size:.88rem;transition:background .15s}
-.mco label:hover{background:var(--neutral);border-color:var(--gold)}
-.mco input[type=radio]{margin-top:.18rem;accent-color:var(--gold);flex-shrink:0}
-.mco .ol{font-weight:700;color:var(--blue);margin-right:.1rem}
-.mco label.ok{background:var(--ok);border-color:var(--green)}
-.mco label.bad{background:var(--bad);border-color:var(--red)}
-textarea.oi{width:100%;border:1.5px solid var(--border);background:var(--neutral);font-family:inherit;font-size:.9rem;padding:.5rem .65rem;color:var(--ink);resize:vertical;min-height:60px;margin-top:.3rem}
-textarea.oi:focus{outline:none;border-color:var(--gold)}
-.two-ans{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-top:.3rem}
-.two-ans textarea{min-height:50px}
-.fb{display:none;margin-top:.7rem;border-radius:2px;overflow:hidden}
-.fbh{padding:.45rem .8rem;font-weight:700;font-size:.8rem}
-.fbb{padding:.55rem .8rem;font-size:.78rem;line-height:1.6;border-top:1px solid rgba(0,0,0,.07)}
-.fbr{margin-bottom:.28rem;display:flex;gap:.4rem;align-items:baseline}
-.mdl{margin-top:.45rem;padding:.38rem .65rem;background:rgba(0,0,0,.04);border-left:3px solid;font-style:italic;font-size:.78rem}
-.ok .fbh{background:var(--ok);color:var(--green)}.ok .fbb{background:#f3fbf5}.ok .mdl{border-color:var(--green)}
-.pt .fbh{background:var(--warn);color:#7a5c00}.pt .fbb{background:#fffdf0}.pt .mdl{border-color:#c8a000}
-.no .fbh{background:var(--bad);color:var(--red)}.no .fbb{background:#fff5f5}.no .mdl{border-color:var(--red)}
-.bdg{display:inline-block;background:var(--ink);color:var(--gold2);font-size:.7rem;font-weight:700;padding:.07rem .38rem;margin-left:.28rem;vertical-align:middle}
-.chk{background:var(--ink);color:var(--gold2);font-family:'Playfair Display',serif;font-weight:700;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;border:none;padding:.5rem 1.1rem;cursor:pointer;margin-top:.6rem}
-.chk:hover{background:var(--gold);color:var(--ink)}
-.chk:disabled{opacity:.35;cursor:not-allowed}
-.ck{display:none;margin-top:.55rem;font-size:.78rem;color:var(--muted);font-style:italic;align-items:center;gap:.45rem}
-.sp{width:13px;height:13px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
-@keyframes spin{to{transform:rotate(360deg)}}
-.sub{margin-top:2.5rem;padding:1.6rem 2rem;background:var(--ink);text-align:center;color:var(--paper)}
-.sub p{color:#a09080;font-size:.82rem;margin-bottom:.9rem}
-.sb{background:var(--gold2);color:var(--ink);font-family:'Playfair Display',serif;font-weight:900;font-size:1rem;letter-spacing:.08em;text-transform:uppercase;border:none;padding:.75rem 2.2rem;cursor:pointer}
-.sb:hover{background:var(--gold)}
-.sc{display:none;background:white;border:3px solid var(--gold2);padding:2rem 1.8rem;margin-top:1.4rem;text-align:center}
-.sc h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900}
-.sn{font-family:'Playfair Display',serif;font-size:3.4rem;font-weight:900;color:var(--gold2);line-height:1}
-.sd{font-size:.82rem;color:var(--muted);margin-top:.4rem}
-.sm{margin-top:.8rem;font-size:.92rem;color:var(--blue);font-style:italic}
-.hr{border:none;border-top:2px solid var(--border);margin:2rem 0}
-@media(max-width:580px){.two-ans{grid-template-columns:1fr}.info{flex-direction:column}.info .meta{margin-left:0}}
+body {font-family: Arial; background:#f5f5f5; margin:0;}
+.container {max-width:800px;margin:auto;padding:20px;background:white;}
+h1 {text-align:center;}
+input, textarea {width:100%; padding:8px; margin:5px 0;}
+button {padding:10px; margin-top:10px; cursor:pointer;}
+.question {margin:20px 0; padding:15px; border:1px solid #ddd;}
 </style>
 </head>
+
 <body>
-<div class="hdr">
-  <h1>READING COMPREHENSION — <span>Learning in Times of War</span></h1>
-  <div class="gr"></div>
-  <p>9th Grade &nbsp;|&nbsp; Teacher: Rinat Asoulin &nbsp;|&nbsp; 100 points</p>
-</div>
-<div class="info">
-  <label>Name: <input type="text" id="sname" placeholder="Your full name"/></label>
-  <label>Class: <input type="text" id="sclass" placeholder="Class"/></label>
-  <div class="meta">Read carefully before answering<br/>Answer in English</div>
-</div>
-<div class="prog"><span class="pl">Progress:</span><div class="pb"><div class="pf" id="pf"></div></div><span class="pl" id="pt">0 / 13</span></div>
 
-<div class="main">
+<div class="container">
 
-<div class="art">
-  <div class="at">LEARNING IN TIMES OF WAR</div>
-  <p>Throughout history, war has repeatedly <strong>disrupted</strong><sup>1</sup> the educational lives of millions of students. Instead of attending ordinary classrooms, children in conflict zones are often <strong>relocated</strong><sup>2</sup> to shelters, temporary schools, or private homes. Yet despite the <strong>instability</strong><sup>3</sup>, many education systems continue to function through remarkable adaptation. Governments, teachers, and families often work together to make sure that learning continues even in dangerous conditions.</p>
-  <p>During the Syrian civil war, for example, some teachers established informal learning centres in underground spaces when school buildings became unsafe. These centres not only protected students physically but also preserved a sense of academic <strong>continuity</strong><sup>4</sup>. In some areas, teachers prepared detailed study booklets and learning packets so that students could continue learning even when travel became impossible or electricity failed. These materials included instructions, examples, and short assignments that students could complete independently.</p>
-  <p>A similar sequence of events occurred during World War II. In several European countries, schools were first closed, then transferred to rural villages, and finally lessons were often held in family homes or shelters. This gradual shift helped students maintain a routine, reducing emotional distress and strengthening <strong>resilience</strong><sup>5</sup>. Historians note that the continuation of learning gave many children a sense of normal life even during extreme uncertainty.</p>
-  <p>Today, in places such as Ukraine, schools combine digital platforms with protected physical spaces. Students may study online during alerts and then continue in shelters or reinforced classrooms. Experts argue that by maintaining structured frameworks, schools do more than teach content; they also <strong>foster</strong><sup>6</sup> emotional stability, long-term hope, and trust in the future. In this way, education becomes both a practical tool and a source of emotional support.</p>
-  <div class="glos">
-    <h4>GLOSSARY</h4>
-    <ul>
-      <li><strong>1. disrupted</strong> — interrupted or stopped from continuing normally</li>
-      <li><strong>2. relocated</strong> — moved to a new place</li>
-      <li><strong>3. instability</strong> — lack of security or balance</li>
-      <li><strong>4. continuity</strong> — an unbroken pattern or continuous existence</li>
-      <li><strong>5. resilience</strong> — the ability to recover quickly from difficulties</li>
-      <li><strong>6. foster</strong> — to promote the growth or development of something</li>
-    </ul>
-  </div>
+<h1>Module E Test</h1>
+
+Name: <input id="name">
+Class: <input id="class">
+
+<hr>
+
+<div class="question">
+<b>1. What are we told about procrastination?</b><br>
+<input type="checkbox" id="q1_1"> misunderstood<br>
+<input type="checkbox" id="q1_2"> common<br>
+<input type="checkbox" id="q1_3"> always good<br>
 </div>
 
-<hr class="hr"/>
-<div class="ph"><h2>QUESTIONS &nbsp;(100 points)</h2><p>Answer in English according to the article. For multiple choice questions, click the correct answer.</p></div>
-
-<!-- Q1 MC 7pts -->
-<div class="qb"><div class="qn">Question 1 <span class="qpts">(7 points)</span></div>
-<div class="qstem">What is the best summary of paragraph I?</div>
-<div class="qi">Circle the correct answer.</div>
-<ul class="mco" id="q1o">
-  <li><label><input type="radio" name="q1" value="i"/><span class="ol">i)</span>Students study better during war.</label></li>
-  <li><label><input type="radio" name="q1" value="ii"/><span class="ol">ii)</span>Conflict changes how and where students learn.</label></li>
-  <li><label><input type="radio" name="q1" value="iii"/><span class="ol">iii)</span>Shelters replace schools permanently.</label></li>
-  <li><label><input type="radio" name="q1" value="iv"/><span class="ol">iv)</span>Teachers stop teaching.</label></li>
-</ul>
-<button class="chk" id="bq1" onclick="doMC('q1','ii',7)">Check answer</button>
-<div class="fb" id="q1f"></div></div>
-
-<!-- Q2 OPEN 8pts -->
-<div class="qb"><div class="qn">Question 2 <span class="qpts">(8 points)</span></div>
-<div class="qstem">Complete the sentence according to paragraph II.</div>
-<div class="qi">Complete the sentence.</div>
-<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.3rem">The study booklets enabled students to continue</div>
-<textarea class="oi" id="q2a" placeholder="Continue the sentence here…"></textarea>
-<button class="chk" id="bq2" onclick="doOpen('q2',8,
-  'Sentence stem: The study booklets enabled students to continue ___. Based on paragraph II, the correct answer is: learning even when travel became impossible or electricity failed / continue learning independently.',
-  'Accept any answer that mentions continuing learning when travel was impossible OR when electricity failed, OR learning independently. Different phrasing is fine as long as the idea of continuing to learn despite obstacles is there. Spelling mistake = deduct 1 point. Grammar mistake = deduct 2 points. Wrong or missing content = 0 points.',
-  'learning even when travel became impossible or electricity failed')">Check answer</button>
-<div class="ck" id="ck2"><div class="sp"></div>Checking…</div>
-<div class="fb" id="q2f"></div></div>
-
-<!-- Q3 MC 7pts -->
-<div class="qb"><div class="qn">Question 3 <span class="qpts">(7 points)</span></div>
-<div class="qstem">What do we learn from paragraph II?</div>
-<div class="qi">Circle the correct answer.</div>
-<ul class="mco" id="q3o">
-  <li><label><input type="radio" name="q3" value="i"/><span class="ol">i)</span>Underground centres supported safety and continuity.</label></li>
-  <li><label><input type="radio" name="q3" value="ii"/><span class="ol">ii)</span>Students preferred online learning.</label></li>
-  <li><label><input type="radio" name="q3" value="iii"/><span class="ol">iii)</span>Teachers only taught in villages.</label></li>
-  <li><label><input type="radio" name="q3" value="iv"/><span class="ol">iv)</span>Schools closed permanently.</label></li>
-</ul>
-<button class="chk" id="bq3" onclick="doMC('q3','i',7)">Check answer</button>
-<div class="fb" id="q3f"></div></div>
-
-<!-- Q4 OPEN 8pts -->
-<div class="qb"><div class="qn">Question 4 <span class="qpts">(8 points)</span></div>
-<div class="qstem">According to paragraph III, what happened after schools were transferred to rural villages?</div>
-<div class="qi">Complete the sentence.</div>
-<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.3rem">After schools were transferred,</div>
-<textarea class="oi" id="q4a" placeholder="Continue the sentence here…"></textarea>
-<button class="chk" id="bq4" onclick="doOpen('q4',8,
-  'Sentence stem: After schools were transferred, ___. Based on paragraph III the correct answer is: lessons were held in family homes or shelters.',
-  'Accept any answer mentioning lessons held in family homes or shelters / homes or underground spaces. The key content is that lessons moved to homes or shelters. Spelling mistake = deduct 1 point. Grammar mistake = deduct 2 points. Wrong or missing content = 0 points.',
-  'lessons were often held in family homes or shelters')">Check answer</button>
-<div class="ck" id="ck4"><div class="sp"></div>Checking…</div>
-<div class="fb" id="q4f"></div></div>
-
-<!-- Q5 OPEN 8pts -->
-<div class="qb"><div class="qn">Question 5 <span class="qpts">(8 points)</span></div>
-<div class="qstem">Complete the sentence according to paragraph III.</div>
-<div class="qi">Complete the sentence.</div>
-<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.3rem">Routine helped students because it reduced</div>
-<textarea class="oi" id="q5a" placeholder="Continue the sentence here…"></textarea>
-<button class="chk" id="bq5" onclick="doOpen('q5',8,
-  'Sentence stem: Routine helped students because it reduced ___. Based on paragraph III the correct answer is: emotional distress (and strengthened resilience).',
-  'Accept: emotional distress, emotional pain, sadness, stress, anxiety, negative feelings. The key word is emotional distress or a clear synonym. Accept emotional distress alone for full marks. Spelling mistake = deduct 1 point. Grammar mistake = deduct 2 points. Wrong or missing content = 0 points.',
-  'emotional distress')">Check answer</button>
-<div class="ck" id="ck5"><div class="sp"></div>Checking…</div>
-<div class="fb" id="q5f"></div></div>
-
-<!-- Q6 OPEN 8pts -->
-<div class="qb"><div class="qn">Question 6 <span class="qpts">(8 points)</span></div>
-<div class="qstem">Complete the sentence according to paragraph IV.</div>
-<div class="qi">Complete the sentence.</div>
-<div style="font-style:italic;color:var(--muted);font-size:.88rem;margin-bottom:.3rem">If schools did not maintain structured frameworks, students might lose</div>
-<textarea class="oi" id="q6a" placeholder="Continue the sentence here…"></textarea>
-<button class="chk" id="bq6" onclick="doOpen('q6',8,
-  'Sentence stem: If schools did not maintain structured frameworks, students might lose ___. Based on paragraph IV the correct answer is: emotional stability, long-term hope, and/or trust in the future.',
-  'Accept any one or combination of: emotional stability, long-term hope, trust in the future, hope, stability, emotional support. Any of these elements from the text earns full marks. Spelling mistake = deduct 1 point. Grammar mistake = deduct 2 points. Wrong or missing content = 0 points.',
-  'emotional stability, long-term hope, and trust in the future')">Check answer</button>
-<div class="ck" id="ck6"><div class="sp"></div>Checking…</div>
-<div class="fb" id="q6f"></div></div>
-
-<!-- Q7 MC inference 7pts -->
-<div class="qb"><div class="qn">Question 7 <span class="qpts">(7 points)</span></div>
-<div class="qstem">What can we infer from the article?</div>
-<div class="qi">Circle the correct answer.</div>
-<ul class="mco" id="q7o">
-  <li><label><input type="radio" name="q7" value="i"/><span class="ol">i)</span>Learning during war supports emotional strength.</label></li>
-  <li><label><input type="radio" name="q7" value="ii"/><span class="ol">ii)</span>Students learn better alone.</label></li>
-  <li><label><input type="radio" name="q7" value="iii"/><span class="ol">iii)</span>Villages are always safer.</label></li>
-  <li><label><input type="radio" name="q7" value="iv"/><span class="ol">iv)</span>Technology solves every problem.</label></li>
-</ul>
-<button class="chk" id="bq7" onclick="doMC('q7','i',7)">Check answer</button>
-<div class="fb" id="q7f"></div></div>
-
-<!-- Q8 OPEN 8pts -->
-<div class="qb"><div class="qn">Question 8 <span class="qpts">(8 points)</span></div>
-<div class="qstem">Why does the writer mention Syria, WWII, and Ukraine?</div>
-<div class="qi">Answer:</div>
-<textarea class="oi" id="q8a" placeholder="Write your answer here…"></textarea>
-<button class="chk" id="bq8" onclick="doOpen('q8',8,
-  'Question: Why does the writer mention Syria, WWII, and Ukraine? The correct answer is: to give examples of how education continues and adapts during different wars / conflicts throughout history.',
-  'Accept any answer that mentions: giving examples, showing how education adapted/continued during wartime, illustrating that education survives war across history. The key idea is that they are examples of adaptation. Spelling mistake = deduct 1 point. Grammar mistake = deduct 2 points. Wrong or vague content = 0 points.',
-  'To give examples of how education continues and adapts during different wars throughout history')">Check answer</button>
-<div class="ck" id="ck8"><div class="sp"></div>Checking…</div>
-<div class="fb" id="q8f"></div></div>
-
-<!-- Q9 MC reference 7pts -->
-<div class="qb"><div class="qn">Question 9 <span class="qpts">(7 points)</span></div>
-<div class="qstem">In the last paragraph, the word <em>"they"</em> refers to:</div>
-<div class="qi">Circle the correct answer.</div>
-<ul class="mco" id="q9o">
-  <li><label><input type="radio" name="q9" value="i"/><span class="ol">i)</span>frameworks</label></li>
-  <li><label><input type="radio" name="q9" value="ii"/><span class="ol">ii)</span>schools</label></li>
-  <li><label><input type="radio" name="q9" value="iii"/><span class="ol">iii)</span>students</label></li>
-  <li><label><input type="radio" name="q9" value="iv"/><span class="ol">iv)</span>platforms</label></li>
-</ul>
-<button class="chk" id="bq9" onclick="doMC('q9','ii',7)">Check answer</button>
-<div class="fb" id="q9f"></div></div>
-
-<!-- Q10 TWO ANSWERS 8pts -->
-<div class="qb"><div class="qn">Question 10 <span class="qpts">(8 points — 4 each)</span></div>
-<div class="qstem">Name TWO places children are moved to when ordinary classrooms are unsafe, according to paragraph I.</div>
-<div class="qi">Write TWO answers:</div>
-<div class="two-ans">
-  <div><div style="font-size:.76rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">PLACE 1:</div><textarea class="oi" id="q10a" rows="1" placeholder="First place…"></textarea></div>
-  <div><div style="font-size:.76rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">PLACE 2:</div><textarea class="oi" id="q10b" rows="1" placeholder="Second place…"></textarea></div>
+<div class="question">
+<b>2. Give TWO reasons for procrastination</b><br>
+<textarea id="q2a"></textarea>
+<textarea id="q2b"></textarea>
 </div>
-<button class="chk" id="bq10" onclick="doDouble('q10',8,
-  'Question asks for TWO places children are moved to when schools are unsafe (paragraph I). The three correct options are: shelters, temporary schools, private homes.',
-  'For each answer: accept shelters/shelter, temporary schools/a temporary school, private homes/a private home, or close paraphrases. 4 points for each correct answer. Spelling mistake on a correct answer = deduct 1 point from that answer. Grammar mistake = deduct 2 points. Wrong place = 0 for that answer.',
-  'Any two of: shelters / temporary schools / private homes')">Check answers</button>
-<div class="ck" id="ck10"><div class="sp"></div>Checking…</div>
-<div class="fb" id="q10f"></div></div>
 
-<!-- Q11 TWO ANSWERS 8pts -->
-<div class="qb"><div class="qn">Question 11 <span class="qpts">(8 points — 4 each)</span></div>
-<div class="qstem">According to paragraph IV, what two elements do schools in Ukraine combine today?</div>
-<div class="qi">Write TWO answers:</div>
-<div class="two-ans">
-  <div><div style="font-size:.76rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">ELEMENT 1:</div><textarea class="oi" id="q11a" rows="1" placeholder="First element…"></textarea></div>
-  <div><div style="font-size:.76rem;color:var(--muted);margin-bottom:.3rem;font-weight:600">ELEMENT 2:</div><textarea class="oi" id="q11b" rows="1" placeholder="Second element…"></textarea></div>
-</div>
-<button class="chk" id="bq11" onclick="doDouble('q11',8,
-  'Question asks for the TWO elements Ukraine schools combine. From paragraph IV: digital platforms (online learning) and protected physical spaces (shelters/reinforced classrooms).',
-  'For each answer: accept digital platforms / online learning / studying online for element 1. Accept protected physical spaces / shelters / reinforced classrooms / physical spaces for element 2. Either order is fine. 4 points each. Spelling = -1. Grammar = -2. Wrong content = 0.',
-  'Digital platforms (online learning) AND protected physical spaces (shelters/reinforced classrooms)')">Check answers</button>
-<div class="ck" id="ck11"><div class="sp"></div>Checking…</div>
-<div class="fb" id="q11f"></div></div>
+<button onclick="submitTest()">Submit</button>
 
-<!-- Q12 MC 8pts -->
-<div class="qb"><div class="qn">Question 12 <span class="qpts">(8 points)</span></div>
-<div class="qstem">What is the main purpose of the article?</div>
-<div class="qi">Circle the correct answer.</div>
-<ul class="mco" id="q12o">
-  <li><label><input type="radio" name="q12" value="i"/><span class="ol">i)</span>To explain the history of modern wars.</label></li>
-  <li><label><input type="radio" name="q12" value="ii"/><span class="ol">ii)</span>To compare World War II to the Syrian civil war.</label></li>
-  <li><label><input type="radio" name="q12" value="iii"/><span class="ol">iii)</span>To show how education adapts and survives during times of conflict.</label></li>
-  <li><label><input type="radio" name="q12" value="iv"/><span class="ol">iv)</span>To argue that digital learning is better than physical schools.</label></li>
-</ul>
-<button class="chk" id="bq12" onclick="doMC('q12','iii',8)">Check answer</button>
-<div class="fb" id="q12f"></div></div>
+<h2 id="score"></h2>
 
-<!-- Q13 MC vocabulary 8pts -->
-<div class="qb"><div class="qn">Question 13 <span class="qpts">(8 points)</span></div>
-<div class="qstem">What does the word <em>"resilience"</em> most likely mean in paragraph III?</div>
-<div class="qi">Circle the correct answer.</div>
-<ul class="mco" id="q13o">
-  <li><label><input type="radio" name="q13" value="i"/><span class="ol">i)</span>Emotional distress</label></li>
-  <li><label><input type="radio" name="q13" value="ii"/><span class="ol">ii)</span>Academic instructions</label></li>
-  <li><label><input type="radio" name="q13" value="iii"/><span class="ol">iii)</span>Extreme uncertainty</label></li>
-  <li><label><input type="radio" name="q13" value="iv"/><span class="ol">iv)</span>Inner strength and ability to recover</label></li>
-</ul>
-<button class="chk" id="bq13" onclick="doMC('q13','iv',8)">Check answer</button>
-<div class="fb" id="q13f"></div></div>
-
-<div class="sub">
-  <p>Make sure you have checked all 13 questions before submitting.</p>
-  <button class="sb" onclick="calcScore()">Submit &amp; See My Score</button>
-  <div class="sc" id="sc">
-    <h2>Your Result</h2>
-    <div class="sn" id="sn">—</div>
-    <div class="sd" id="sd"></div>
-    <div class="sm" id="sm"></div>
-    <div id="sendstatus" style="margin-top:1rem;display:none"></div>
-  </div>
-</div>
 </div>
 
 <script>
-const SCRIPT_URL='https://script.google.com/macros/s/AKfycbwNL1YOgQyKNqO0r0N9Yf9JBAvFNGqGoKYqTCDbgTonziK7VNL627u_cqPYY1KXktiffw/exec';
-const scores={};const done=new Set();const answers={};
-function upd(){const t=13,d=done.size;document.getElementById('pf').style.width=(d/t*100)+'%';document.getElementById('pt').textContent=d+' / '+t;}
-function bdg(n){return`<span class="bdg">${n}</span>`;}
-function fb(id,type,hdr,rows,model){
-  const el=document.getElementById(id);
-  const mdl=model?`<div class="mdl">✎ Model answer: ${model}</div>`:'';
-  el.className='fb '+type;
-  el.innerHTML=`<div class="fbh">${hdr}</div><div class="fbb">${rows.map(r=>`<div class="fbr"><span>${r.i}</span><span>${r.t}</span></div>`).join('')}${mdl}</div>`;
-  el.style.display='block';
-}
 
-function doMC(qId,correct,pts){
-  const opts=document.querySelectorAll(`#${qId}o input`);let chosen=null;
-  opts.forEach(r=>{if(r.checked)chosen=r.value;});
-  if(!chosen){fb(qId+'f','no','Please select an answer.',[{i:'⚠️',t:'Click one of the options above.'}],null);return;}
-  opts.forEach(r=>{r.disabled=true;if(r.value===correct)r.parentElement.classList.add('ok');if(r.checked&&r.value!==correct)r.parentElement.classList.add('bad');});
-  document.getElementById('b'+qId).disabled=true;
-  const ok=chosen===correct;scores[qId]=ok?pts:0;done.add(qId);upd();
-  answers[qId]=ok?'✅ '+chosen+') '+pts+'pts':'❌ (chose '+chosen+') 0pts';
-  if(ok)fb(qId+'f','ok',`✓ Correct! ${bdg('+'+pts+' pts')}`,[{i:'✅',t:'Well done — that is the right answer.'}],null);
-  else fb(qId+'f','no',`✗ Incorrect ${bdg('0 pts')}`,[
-    {i:'❌',t:`You chose <strong>${chosen})</strong>. The correct answer is <strong>${correct})</strong>.`},
-    {i:'📖',t:'Re-read the paragraph carefully and look for the main idea.'}
-  ],null);
-}
+// YOUR GOOGLE SCRIPT URL
+const APPS_URL = "https://script.google.com/macros/s/AKfycbykMDYp5fRG-Cs5CfM9518yiF-zeA8k0dHKwedHOapMFxMj5w9SyJtkJVOAieUaKD0n/exec";
 
-async function doOpen(qId,pts,context,guide,model){
-  const raw=document.getElementById(qId+'a').value;const inp=raw.trim();
-  if(!inp){fb(qId+'f','no','Please write your answer.',[{i:'⚠️',t:'The box is empty.'}],null);return;}
-  document.getElementById('b'+qId).disabled=true;
-  document.getElementById(qId+'a').disabled=true;
-  const ck=document.getElementById('ck'+qId);if(ck)ck.style.display='flex';
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:250,
-      messages:[{role:'user',content:`You are marking a 9th grade English reading comprehension exam.\n\n${context}\n\nMARKING RULES — apply strictly:\n${guide}\n\nCRITICAL:\n- Capitalization errors: IGNORE, zero deduction\n- Spelling mistakes: deduct 1 point (set spelling_penalty:1)\n- Grammar mistakes (wrong verb form, missing article, wrong tense, subject-verb agreement): deduct 2 points (set grammar_penalty:2)\n- Both spelling AND grammar mistakes in one answer: deduct 3 points total\n- Different phrasing with correct meaning: FULL marks\n- Vague, off-topic or factually wrong content: correct:false\n\nSTUDENT'S ANSWER: "${inp}"\n\nReply ONLY with JSON (no other text):\n{"correct":true,"spelling_penalty":0,"grammar_penalty":0,"reason":"one sentence","tip":"one brief tip"}\n\nPenalties: spelling_penalty=0 or 1. grammar_penalty=0 or 2. Only set if content is correct first.`}]
-    })});
-    if(ck)ck.style.display='none';
-    const data=await res.json();
-    let result;
-    try{result=JSON.parse(data.content[0].text.trim());}
-    catch(e){result={correct:true,spelling_penalty:0,grammar_penalty:0,reason:'Answer recorded.',tip:'Good effort!'};}
-    const ok=result.correct===true;
-    const sp=ok?(result.spelling_penalty||0):0;
-    const gp=ok?(result.grammar_penalty||0):0;
-    const earned=ok?Math.max(0,pts-sp-gp):0;
-    scores[qId]=earned;done.add(qId);upd();
-    answers[qId]=(ok?'✅':'❌')+' '+earned+'pts | '+inp.substring(0,80);
-    if(ok&&sp===0&&gp===0){
-      fb(qId+'f','ok',`✓ Correct! ${bdg('+'+pts+' pts')}`,[{i:'✅',t:result.tip||'Well done!'},{i:'📝',t:result.reason}],null);
-    }else if(ok&&(sp>0||gp>0)){
-      const deds=[];if(sp>0)deds.push('Spelling: −1');if(gp>0)deds.push('Grammar: −2');
-      fb(qId+'f','pt',`Correct content — deductions: ${deds.join(', ')} ${bdg('+'+earned+' / '+pts+' pts')}`,[
-        {i:'✅',t:'Your answer contains the correct information.'},
-        {i:'📝',t:result.reason},
-        {i:'💡',t:result.tip||'Check your spelling and grammar.'}
-      ],null);
-    }else{
-      fb(qId+'f','no',`✗ Incorrect ${bdg('0 pts')}`,[
-        {i:'❌',t:result.reason||'The key information from the text is missing.'},
-        {i:'📖',t:'Re-read the paragraph and look for the specific detail.'}
-      ],model);
-    }
-  }catch(err){
-    if(ck)ck.style.display='none';
-    scores[qId]=pts;done.add(qId);upd();
-    answers[qId]='✅ '+pts+'pts (auto) | '+inp.substring(0,80);
-    fb(qId+'f','ok',`Answer recorded ${bdg(pts+' pts')}`,[{i:'📝',t:'Your answer has been saved.'},{i:'✎',t:'Compare with the model answer above.'}],model);
+function submitTest(){
+
+  const name = document.getElementById("name").value.trim();
+
+  if(name === ""){
+    alert("You must enter your name");
+    return;
   }
+
+  let reading = 0;
+  let vocab = 0;
+
+  // Q1 grading
+  const q1_correct = document.getElementById("q1_1").checked && document.getElementById("q1_2").checked;
+  const q1_extra = document.getElementById("q1_3").checked;
+
+  if(q1_correct && !q1_extra) reading += 14;
+  else if(q1_correct || (document.getElementById("q1_1").checked || document.getElementById("q1_2").checked)) reading += 7;
+
+  // Q2 grading (simple keyword)
+  const a = document.getElementById("q2a").value.toLowerCase();
+  const b = document.getElementById("q2b").value.toLowerCase();
+
+  let score2 = 0;
+
+  if(a.includes("stress") || b.includes("stress")) score2 += 8;
+  if(a.includes("overwhelming") || b.includes("overwhelming")) score2 += 8;
+
+  reading += score2;
+
+  const total = reading + vocab;
+
+  document.getElementById("score").innerText = "Score: " + total;
+
+  // SEND TO GOOGLE SHEETS
+  fetch(APPS_URL, {
+    method: "POST",
+    body: JSON.stringify({
+      name: name,
+      class: document.getElementById("class").value,
+      reading: reading,
+      vocab: vocab,
+      total: total
+    })
+  });
+
 }
 
-async function doDouble(qId,pts,context,guide,model){
-  const rawA=document.getElementById(qId+'a').value.trim();
-  const rawB=document.getElementById(qId+'b').value.trim();
-  if(!rawA||!rawB){fb(qId+'f','no','Please fill in both answers.',[{i:'⚠️',t:'Both boxes must be filled.'}],null);return;}
-  document.getElementById('b'+qId).disabled=true;
-  document.getElementById(qId+'a').disabled=true;
-  document.getElementById(qId+'b').disabled=true;
-  const ck=document.getElementById('ck'+qId);if(ck)ck.style.display='flex';
-  const halfPts=pts/2;
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      model:'claude-sonnet-4-20250514',max_tokens:350,
-      messages:[{role:'user',content:`You are marking a 9th grade English exam. This question has TWO answers worth ${halfPts} points each (${pts} total).\n\n${context}\n\nMARKING RULES:\n${guide}\n\nCRITICAL:\n- Capitalization: IGNORE\n- Spelling mistake on a correct answer: deduct 1 point from that answer\n- Grammar mistake on a correct answer: deduct 2 points from that answer\n- Wrong content: 0 for that answer\n- Each answer marked independently\n\nANSWER 1: "${rawA}"\nANSWER 2: "${rawB}"\n\nReply ONLY with JSON:\n{"ans1":{"correct":true,"spelling_penalty":0,"grammar_penalty":0,"reason":"why"},"ans2":{"correct":true,"spelling_penalty":0,"grammar_penalty":0,"reason":"why"},"tip":"one overall tip"}`}]
-    })});
-    if(ck)ck.style.display='none';
-    const data=await res.json();
-    let result;
-    try{result=JSON.parse(data.content[0].text.trim());}
-    catch(e){result={ans1:{correct:true,spelling_penalty:0,grammar_penalty:0,reason:'Recorded.'},ans2:{correct:true,spelling_penalty:0,grammar_penalty:0,reason:'Recorded.'},tip:'Good effort!'};}
-    let total=0;const rows=[];
-    [['ans1',rawA,1],['ans2',rawB,2]].forEach(([key,ans,num])=>{
-      const a=result[key]||{correct:true,spelling_penalty:0,grammar_penalty:0,reason:''};
-      const sp=a.correct?(a.spelling_penalty||0):0;
-      const gp=a.correct?(a.grammar_penalty||0):0;
-      const earned=a.correct?Math.max(0,halfPts-sp-gp):0;
-      total+=earned;
-      const deds=[];if(sp>0)deds.push('spelling −1');if(gp>0)deds.push('grammar −2');
-      const dedStr=deds.length?' ('+deds.join(', ')+')':'';
-      rows.push({i:a.correct?'✅':'❌',t:`Answer ${num}: <strong>${ans}</strong> — ${a.correct?'correct'+dedStr:'incorrect'} → ${earned}/${halfPts} pts. ${a.reason||''}`});
-    });
-    scores[qId]=total;done.add(qId);upd();
-    answers[qId]=total+'pts | "'+rawA+'" / "'+rawB+'"';
-    const type=total===pts?'ok':total>0?'pt':'no';
-    const hdr=total===pts?`✓ Both correct! ${bdg('+'+pts+' pts')}`:total>0?`Partially correct ${bdg('+'+total+' / '+pts+' pts')}`:`✗ Incorrect ${bdg('0 pts')}`;
-    if(result.tip)rows.push({i:'💡',t:result.tip});
-    fb(qId+'f',type,hdr,rows,total<pts?model:null);
-  }catch(err){
-    if(ck)ck.style.display='none';
-    scores[qId]=pts;done.add(qId);upd();
-    answers[qId]=pts+'pts (auto) | "'+rawA+'" / "'+rawB+'"';
-    fb(qId+'f','ok',`Answers recorded ${bdg(pts+' pts')}`,[{i:'📝',t:'Your answers have been saved.'},{i:'✎',t:'Compare with the model answer.'}],model);
-  }
-}
-
-async function calcScore(){
-  let tot=0;
-  Object.values(scores).forEach(v=>tot+=v);
-  tot=Math.round(tot);
-  const panel=document.getElementById('sc');panel.style.display='block';
-  document.getElementById('sn').textContent=tot+' / 100';
-  document.getElementById('sd').textContent=Object.keys(scores).length+' of 13 questions checked';
-  const pct=tot/100;
-  document.getElementById('sm').textContent=pct>=.9?'Excellent work!':pct>=.75?'Good job! Review what you missed.':pct>=.55?'Keep practising — read the paragraphs carefully.':'Go over the text again with your teacher.';
-  panel.scrollIntoView({behavior:'smooth',block:'center'});
-  // Send to teacher
-  const sname=document.getElementById('sname').value.trim()||'(no name)';
-  const sclass=document.getElementById('sclass').value.trim()||'(no class)';
-  const payload={name:sname,class:sclass,total:tot,
-    q1:answers.q1||'—',q2:answers.q2||'—',q3:answers.q3||'—',q4:answers.q4||'—',
-    q5:answers.q5||'—',q6:answers.q6||'—',q7:answers.q7||'—',q8:answers.q8||'—',
-    q9:answers.q9||'—',q10:answers.q10||'—',q11:answers.q11||'—',q12:answers.q12||'—',q13:answers.q13||'—'};
-  const sd=document.getElementById('sendstatus');sd.style.display='block';
-  sd.innerHTML='<span style="color:#a09080;font-size:.8rem">📤 Sending results to teacher…</span>';
-  try{
-    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
-    sd.innerHTML='<span style="color:#1e6b3c;font-size:.85rem;font-weight:600">✅ Results sent to your teacher!</span>';
-  }catch(err){
-    sd.innerHTML='<span style="color:#c0392b;font-size:.8rem">⚠️ Could not send automatically. Tell your teacher your score: <strong>'+tot+'/100</strong></span>';
-  }
-}
-upd();
 </script>
+
 </body>
 </html>
