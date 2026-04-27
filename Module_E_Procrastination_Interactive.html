@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Module E — Why We Procrastinate</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1a1a2e;--paper:#faf8f3;--cream:#f0ece0;--gold:#b8860b;--gold2:#d4a017;--red:#c0392b;--green:#1e6b3c;--blue:#1a3a5c;--muted:#6b6050;--border:#d4c9b0;--neutral:#f5f2eb;--ok:#eaf6ee;--bad:#fdecea;--amber:#fff8e1;--amberb:#f9a825;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Source Serif 4',serif;background:var(--paper);color:var(--ink);line-height:1.75;font-size:16px;}
+.header{background:var(--ink);color:white;padding:2rem 2rem 1.5rem;text-align:center;}
+.header-eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;opacity:.6;font-family:system-ui;margin-bottom:.4rem;}
+.header h1{font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:.25rem;line-height:1.3;}
+.header p{font-size:.85rem;opacity:.65;font-style:italic;}
+.mode-bar{background:var(--cream);border-bottom:2px solid var(--border);padding:.75rem 1.5rem;display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;}
+.mode-label{font-size:.78rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-family:system-ui;}
+.mode-btn{padding:.4rem 1.2rem;border-radius:99px;border:2px solid var(--border);background:white;color:var(--ink);font-size:.85rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:system-ui;}
+.mode-btn.active{background:var(--ink);color:white;border-color:var(--ink);}
+.mode-hint{margin-left:auto;font-size:.8rem;color:var(--muted);font-style:italic;font-family:system-ui;}
+.progress-wrap{position:sticky;top:0;z-index:100;background:white;border-bottom:1px solid var(--border);padding:.5rem 1.5rem;}
+.progress-track{height:5px;background:#e0ddd6;border-radius:99px;overflow:hidden;margin-bottom:.25rem;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--gold));border-radius:99px;transition:width .4s ease;width:0%;}
+.progress-label{font-size:.72rem;color:var(--muted);text-align:right;font-family:system-ui;}
+.student-bar{background:var(--neutral);border-bottom:1px solid var(--border);padding:.7rem 1.5rem;display:flex;gap:1.5rem;flex-wrap:wrap;align-items:center;}
+.student-bar label{font-size:.8rem;color:var(--muted);font-weight:700;font-family:system-ui;text-transform:uppercase;letter-spacing:.06em;}
+.student-bar input{border:1.5px solid var(--border);border-radius:7px;padding:.3rem .8rem;font-size:.9rem;font-family:'Source Serif 4',serif;background:white;min-width:160px;}
+.wrap{max-width:760px;margin:0 auto;padding:0 1.5rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--blue);padding-bottom:.5rem;border-bottom:2.5px solid var(--gold);margin:2rem 0 1.2rem;}
+.article-para{font-size:1rem;line-height:1.9;margin-bottom:.9rem;text-align:justify;}
+.para-num{font-family:'Playfair Display',serif;font-weight:900;color:var(--blue);margin-right:.5rem;}
+.gw{border-bottom:1.5px solid var(--gold);color:var(--blue);font-weight:600;cursor:help;}
+.gw sup{font-size:.6em;color:var(--gold);font-weight:700;}
+.gtable{width:100%;border-collapse:collapse;font-size:.86rem;margin-top:1.2rem;}
+.gtable th{background:var(--ink);color:white;padding:.5rem .6rem;text-align:left;font-family:'Playfair Display',serif;font-size:.82rem;font-weight:700;}
+.gtable td{padding:.4rem .6rem;border-bottom:1px solid var(--border);}
+.gtable tr:nth-child(even) td{background:var(--cream);}
+.qblock{background:white;border:1px solid var(--border);border-radius:12px;padding:1.4rem 1.5rem;margin-bottom:1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.05);}
+.q-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:.7rem;}
+.q-num{font-family:'Playfair Display',serif;font-weight:900;color:var(--blue);font-size:1rem;}
+.pts-tag{font-size:.72rem;background:var(--cream);color:var(--muted);padding:.15rem .6rem;border-radius:99px;border:1px solid var(--border);font-family:system-ui;font-weight:700;}
+.q-text{font-size:.97rem;font-weight:700;line-height:1.55;color:var(--ink);margin-bottom:.9rem;}
+.q-sub{font-size:.88rem;color:var(--muted);margin-bottom:.7rem;font-style:italic;}
+/* MC opts */
+.mc-opts{display:flex;flex-direction:column;gap:.45rem;}
+.mc-opt{display:flex;align-items:flex-start;gap:.65rem;padding:.6rem .85rem;border:2px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;background:white;font-size:.92rem;line-height:1.5;text-align:left;width:100%;font-family:'Source Serif 4',serif;}
+.mc-opt:hover:not(.disabled){border-color:var(--blue);background:#eef3f8;}
+.mc-opt.selected{border-color:var(--blue);background:#e8f0f8;}
+.mc-opt.correct{border-color:var(--green)!important;background:var(--ok)!important;color:var(--green);}
+.mc-opt.wrong{border-color:var(--red)!important;background:var(--bad)!important;color:var(--red);}
+.mc-opt.disabled{cursor:default;}
+.mc-opt.correct.disabled,.mc-opt.wrong.disabled{opacity:1;}
+.opt-l{font-weight:800;min-width:18px;color:var(--blue);font-size:.85rem;flex-shrink:0;}
+.mc-opt.correct .opt-l,.mc-opt.wrong .opt-l{color:inherit;}
+.mc-hint{font-size:.78rem;color:var(--muted);font-style:italic;margin-bottom:.6rem;font-family:system-ui;}
+/* Open */
+.part-label{font-weight:700;color:var(--blue);font-size:.9rem;margin-bottom:.3rem;font-family:'Playfair Display',serif;}
+.stem-line{font-size:.93rem;color:var(--muted);font-style:italic;margin-bottom:.45rem;line-height:1.5;}
+.open-ta{width:100%;border:1.5px solid var(--border);border-radius:8px;padding:.6rem .8rem;font-size:.92rem;font-family:'Source Serif 4',serif;resize:vertical;min-height:60px;background:var(--neutral);line-height:1.6;transition:border-color .2s;}
+.open-ta:focus{outline:none;border-color:var(--blue);background:white;}
+.check-btn{margin-top:.6rem;padding:.42rem 1.2rem;background:var(--blue);color:white;border:none;border-radius:7px;font-size:.83rem;font-weight:700;cursor:pointer;font-family:system-ui;transition:background .2s;}
+.check-btn:hover:not(:disabled){background:#2e5f8a;}
+.check-btn:disabled{background:#bbb;cursor:default;}
+.spinner{font-size:.82rem;color:var(--muted);margin-top:.4rem;display:none;font-family:system-ui;}
+.spinner.show{display:block;}
+.fb{margin-top:.65rem;padding:.75rem 1rem;border-radius:8px;font-size:.88rem;line-height:1.65;display:none;border-left:4px solid transparent;}
+.fb.show{display:block;}
+.fb-ok{background:var(--ok);border-color:var(--green);color:#143d22;}
+.fb-bad{background:var(--bad);border-color:var(--red);color:#6b1111;}
+.fb-partial{background:var(--amber);border-color:var(--amberb);color:#5d4000;}
+.fb strong{display:block;font-size:.92rem;margin-bottom:.3rem;}
+.model-ans{font-style:italic;margin-top:.4rem;padding:.4rem .7rem;background:rgba(255,255,255,.6);border-radius:5px;font-size:.86rem;}
+/* Vocab */
+.vtable{width:100%;border-collapse:collapse;font-size:.9rem;margin-top:.8rem;}
+.vtable th{background:var(--cream);color:var(--blue);padding:.5rem .7rem;text-align:left;font-weight:700;border-bottom:2px solid var(--border);font-family:system-ui;font-size:.82rem;text-transform:uppercase;letter-spacing:.06em;}
+.vtable td{padding:.5rem .7rem;border-bottom:1px solid var(--border);vertical-align:middle;}
+.vtable tr:nth-child(even) td{background:#fafaf8;}
+.vans{width:48px;border:1.5px solid var(--border);border-radius:6px;padding:.28rem .4rem;text-align:center;font-size:.92rem;font-weight:700;text-transform:uppercase;font-family:'Source Serif 4',serif;transition:all .2s;}
+.vans:focus{outline:none;border-color:var(--blue);}
+.vans.ok{border-color:var(--green);background:var(--ok);color:var(--green);}
+.vans.bad{border-color:var(--red);background:var(--bad);color:var(--red);}
+.def-key{font-weight:800;color:var(--gold);margin-right:.3rem;}
+.section-hr{border:none;border-top:2px solid var(--border);margin:2rem 0;}
+/* Submit */
+.submit-area{max-width:760px;margin:2rem auto 4rem;padding:0 1.5rem;text-align:center;}
+.sub-btn{padding:1rem 3.5rem;background:var(--ink);color:white;border:none;border-radius:12px;font-size:1.05rem;font-weight:700;cursor:pointer;font-family:'Playfair Display',serif;letter-spacing:.03em;transition:background .2s;box-shadow:0 4px 20px rgba(26,26,46,.2);}
+.sub-btn:hover:not(:disabled){background:#2a2a4e;}
+.sub-btn:disabled{background:#888;cursor:default;}
+.marking-msg{font-size:.88rem;color:var(--muted);margin-top:.8rem;font-style:italic;font-family:system-ui;display:none;}
+.marking-msg.show{display:block;}
+.score-panel{background:var(--ink);color:white;border-radius:16px;padding:2.5rem 2rem;margin-top:2rem;display:none;}
+.score-panel.show{display:block;}
+.score-big{font-family:'Playfair Display',serif;font-size:4rem;font-weight:900;color:var(--gold2);text-align:center;line-height:1;}
+.score-denom{font-size:1.5rem;font-weight:400;opacity:.7;}
+.score-sub{text-align:center;opacity:.65;font-size:.9rem;margin:.4rem 0 1.5rem;}
+.score-split{display:flex;justify-content:center;gap:2.5rem;margin-bottom:1.5rem;flex-wrap:wrap;}
+.split-item{text-align:center;}
+.split-num{font-size:1.8rem;font-weight:800;color:var(--gold2);}
+.split-lbl{font-size:.75rem;opacity:.65;font-family:system-ui;text-transform:uppercase;letter-spacing:.08em;}
+.score-bar-wrap{max-width:320px;margin:0 auto 1.5rem;}
+.score-bar{height:10px;background:rgba(255,255,255,.2);border-radius:99px;overflow:hidden;}
+.score-bar-fill{height:100%;border-radius:99px;transition:width .8s ease;}
+.score-msg{text-align:center;font-style:italic;font-size:.95rem;opacity:.85;line-height:1.6;}
+.saved-msg{font-size:.82rem;color:#4caf50;margin-top:.6rem;font-family:system-ui;display:none;}
+.saved-msg.show{display:block;}
+@media(max-width:600px){.wrap,.submit-area{padding:0 .9rem;}.header h1{font-size:1.25rem;}}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-eyebrow">Module E · 016471 · Hebrew Reali School, Haifa</div>
+  <h1>Why We Procrastinate</h1>
+  <p>Teacher: Rinat Asoulin &nbsp;·&nbsp; Part I: Written Reception (80 pts) &nbsp;·&nbsp; Part II: Lexical Knowledge (30 pts)</p>
+</div>
+
+<div class="mode-bar">
+  <span class="mode-label">Mode:</span>
+  <button class="mode-btn active" id="practiceBtn" onclick="setMode('practice')">📖 Practice</button>
+  <button class="mode-btn" id="testBtn" onclick="setMode('test')">📝 Test</button>
+  <span class="mode-hint" id="modeHint">Practice: get instant feedback after each answer</span>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="progress-label" id="progressLabel">0 / 13 answered</div>
+</div>
+
+<div class="student-bar">
+  <label>Name: <input type="text" id="sName" placeholder="First and last name"></label>
+  <label>Class: <input type="text" id="sClass" placeholder="e.g. י׳2" style="min-width:90px;"></label>
+  <label>Date: <input type="date" id="sDate"></label>
+</div>
+
+<div class="wrap">
+
+  <!-- ARTICLE -->
+  <div class="section-title">Part I: Written Reception <span style="font-weight:400;font-size:.85rem;color:var(--muted)">(80 points)</span></div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:1.2rem;font-style:italic;">Answer questions 1–8 in English according to the article.</p>
+
+  <div class="article-para"><span class="para-num">I</span> Most people have experienced <span class="gw" title="דחיינות / المماطلة / прокрастинация / procrastination / procrastinación / ማዘግየት" id="gw1">procrastination<sup>1</sup></span> at some point in their lives. Students delay studying, employees postpone important tasks, and even simple daily responsibilities are often avoided. Although people usually believe procrastination is caused by <span class="gw" title="עצלנות / الكسل / лень / paresse / pereza / ስንፍና" id="gw2">laziness<sup>2</sup></span>, researchers argue that it is more complex than it appears.</div>
+
+  <div class="article-para"><span class="para-num">II</span> One explanation is that procrastination is related to emotions rather than time management. When a task feels <span class="gw" title="מכריע / ساحق / подавляющий / accablant / abrumador / አስቸጋሪ" id="gw3">overwhelming<sup>3</sup></span> or unpleasant, people tend to avoid it in order to reduce stress. In this way, procrastination becomes a short-term emotional relief, even though it creates problems in the long term.</div>
+
+  <div class="article-para"><span class="para-num">III</span> Another factor is fear of failure. Some individuals delay starting a task because they are afraid they will not succeed. By postponing the task, they protect themselves from possible disappointment. However, this behavior often leads to lower performance and increased <span class="gw" title="חרדה / قلق / тревожность / anxiété / ansiedad / ጭንቀት" id="gw4">anxiety<sup>4</sup></span>.</div>
+
+  <div class="article-para"><span class="para-num">IV</span> Procrastination can also be influenced by a lack of clear goals. When people are unsure about what they need to do, they are more likely to delay action. Clear and specific goals can reduce <span class="gw" title="אי-ודאות / عدم اليقين / неопределённость / incertitude / incertidumbre / አለመረጋጋት" id="gw5">uncertainty<sup>5</sup></span> and encourage individuals to begin tasks earlier.</div>
+
+  <div class="article-para"><span class="para-num">V</span> Experts suggest breaking large tasks into smaller steps as a solution. This approach makes tasks feel more <span class="gw" title="ניתן לניהול / قابل للإدارة / управляемый / gérable / manejable / ሊይዙት የሚቻል" id="gw6">manageable<sup>6</sup></span> and reduces the emotional pressure associated with them. Over time, this strategy can help people develop better work habits and improve productivity.</div>
+
+  <table class="gtable">
+    <tr><th>#</th><th>Word</th><th>עברית</th><th>العربية</th><th>Русский</th><th>Français</th><th>Español</th></tr>
+    <tr><td>1</td><td>procrastination</td><td>דחיינות</td><td>المماطلة</td><td>прокрастинация</td><td>procrastination</td><td>procrastinación</td></tr>
+    <tr><td>2</td><td>laziness</td><td>עצלנות</td><td>الكسل</td><td>лень</td><td>paresse</td><td>pereza</td></tr>
+    <tr><td>3</td><td>overwhelming</td><td>מכריע</td><td>ساحق</td><td>подавляющий</td><td>accablant</td><td>abrumador</td></tr>
+    <tr><td>4</td><td>anxiety</td><td>חרדה</td><td>قلق</td><td>тревожность</td><td>anxiété</td><td>ansiedad</td></tr>
+    <tr><td>5</td><td>uncertainty</td><td>אי-ודאות</td><td>عدم اليقين</td><td>неопределённость</td><td>incertitude</td><td>incertidumbre</td></tr>
+    <tr><td>6</td><td>manageable</td><td>ניתן לניהול</td><td>قابل للإدارة</td><td>управляемый</td><td>gérable</td><td>manejable</td></tr>
+  </table>
+
+  <hr class="section-hr">
+
+  <!-- Q1 — MC TWO answers -->
+  <div class="qblock" id="qblock1">
+    <div class="q-top"><span class="q-num">1.</span><span class="pts-tag">14 points · 2 correct answers</span></div>
+    <div class="q-text">What are we told about procrastination in <strong>paragraph I</strong>?</div>
+    <div class="mc-hint">PUT A ✔ BY THE <u>TWO</u> CORRECT ANSWERS.</div>
+    <div class="mc-opts" id="q1opts">
+      <button class="mc-opt" onclick="selectMC2(1,0)"><span class="opt-l">i</span>It only affects students and employees.</button>
+      <button class="mc-opt" onclick="selectMC2(1,1)"><span class="opt-l">ii</span>It is often misunderstood as a sign of laziness.</button>
+      <button class="mc-opt" onclick="selectMC2(1,2)"><span class="opt-l">iii</span>It always leads to better results in the end.</button>
+      <button class="mc-opt" onclick="selectMC2(1,3)"><span class="opt-l">iv</span>It is a widespread human experience.</button>
+      <button class="mc-opt" onclick="selectMC2(1,4)"><span class="opt-l">v</span>It only happens in situations that are genuinely difficult.</button>
+    </div>
+    <button class="check-btn" id="check1" onclick="checkMC2(1,[1,3])" disabled>Check Answer</button>
+    <div class="fb" id="fb1"></div>
+  </div>
+
+  <!-- Q2 — TWO-PART OPEN -->
+  <div class="qblock" id="qblock2">
+    <div class="q-top"><span class="q-num">2.</span><span class="pts-tag">16 points · 8 pts each</span></div>
+    <div class="q-text">According to <strong>paragraph II</strong>, why do people procrastinate? Name <u>TWO</u> reasons.</div>
+    <div style="margin-bottom:1rem;">
+      <div class="part-label">a)</div>
+      <textarea class="open-ta" id="q2aans" placeholder="First reason..." oninput="onOpenType2()" style="min-height:52px;"></textarea>
+    </div>
+    <div style="margin-bottom:.4rem;">
+      <div class="part-label">b)</div>
+      <textarea class="open-ta" id="q2bans" placeholder="Second reason..." oninput="onOpenType2()" style="min-height:52px;"></textarea>
+    </div>
+    <button class="check-btn" id="check2" onclick="checkOpen2()" disabled>Check with AI</button>
+    <div class="spinner" id="spin2">⏳ Checking with AI…</div>
+    <div class="fb" id="fb2a"></div>
+    <div class="fb" id="fb2b" style="margin-top:.4rem;"></div>
+  </div>
+
+  <!-- Q3 — SENTENCE COMPLETION -->
+  <div class="qblock" id="qblock3">
+    <div class="q-top"><span class="q-num">3.</span><span class="pts-tag">8 points</span></div>
+    <div class="q-text">COMPLETE THE SENTENCE.</div>
+    <div class="stem-line">According to <strong>paragraph III</strong>, people delay tasks because they are afraid</div>
+    <textarea class="open-ta" id="q3ans" placeholder="Complete the sentence..." oninput="onOpenType(3)" style="min-height:52px;"></textarea>
+    <button class="check-btn" id="check3" onclick="checkOpen(3)" disabled>Check with AI</button>
+    <div class="spinner" id="spin3">⏳ Checking with AI…</div>
+    <div class="fb" id="fb3"></div>
+  </div>
+
+  <!-- Q4 — OPEN -->
+  <div class="qblock" id="qblock4">
+    <div class="q-top"><span class="q-num">4.</span><span class="pts-tag">8 points</span></div>
+    <div class="q-text">Name <u>ONE</u> cause of procrastination mentioned in <strong>paragraph IV</strong>.</div>
+    <div class="stem-line">ANSWER:</div>
+    <textarea class="open-ta" id="q4ans" placeholder="Write your answer..." oninput="onOpenType(4)" style="min-height:52px;"></textarea>
+    <button class="check-btn" id="check4" onclick="checkOpen(4)" disabled>Check with AI</button>
+    <div class="spinner" id="spin4">⏳ Checking with AI…</div>
+    <div class="fb" id="fb4"></div>
+  </div>
+
+  <!-- Q5 — PURPOSE -->
+  <div class="qblock" id="qblock5">
+    <div class="q-top"><span class="q-num">5.</span><span class="pts-tag">8 points</span></div>
+    <div class="q-text">Why does the writer mention "emotional relief" in <strong>paragraph II</strong>?</div>
+    <div class="stem-line">ANSWER:</div>
+    <textarea class="open-ta" id="q5ans" placeholder="Write your answer..." oninput="onOpenType(5)" style="min-height:52px;"></textarea>
+    <button class="check-btn" id="check5" onclick="checkOpen(5)" disabled>Check with AI</button>
+    <div class="spinner" id="spin5">⏳ Checking with AI…</div>
+    <div class="fb" id="fb5"></div>
+  </div>
+
+  <!-- Q6 — MC ONE -->
+  <div class="qblock" id="qblock6">
+    <div class="q-top"><span class="q-num">6.</span><span class="pts-tag">8 points</span></div>
+    <div class="q-text">What can we understand from <strong>paragraph V</strong>?</div>
+    <div class="mc-hint">PUT A ✔ BY THE CORRECT ANSWER.</div>
+    <div class="mc-opts" id="q6opts">
+      <button class="mc-opt" onclick="selectMC(6,0)"><span class="opt-l">i</span>Large tasks should simply be avoided altogether.</button>
+      <button class="mc-opt" onclick="selectMC(6,1)"><span class="opt-l">ii</span>Breaking tasks into smaller steps can help people work more effectively.</button>
+      <button class="mc-opt" onclick="selectMC(6,2)"><span class="opt-l">iii</span>People naturally develop good work habits without any strategy.</button>
+      <button class="mc-opt" onclick="selectMC(6,3)"><span class="opt-l">iv</span>Emotions have no effect on how people approach their work.</button>
+    </div>
+    <button class="check-btn" id="check6" onclick="checkMC(6,1)" disabled>Check Answer</button>
+    <div class="fb" id="fb6"></div>
+  </div>
+
+  <!-- Q7 — PURPOSE -->
+  <div class="qblock" id="qblock7">
+    <div class="q-top"><span class="q-num">7.</span><span class="pts-tag">8 points</span></div>
+    <div class="q-text">Why does the writer mention fear of failure in <strong>paragraph III</strong>?</div>
+    <div class="stem-line">ANSWER:</div>
+    <textarea class="open-ta" id="q7ans" placeholder="Write your answer..." oninput="onOpenType(7)" style="min-height:52px;"></textarea>
+    <button class="check-btn" id="check7" onclick="checkOpen(7)" disabled>Check with AI</button>
+    <div class="spinner" id="spin7">⏳ Checking with AI…</div>
+    <div class="fb" id="fb7"></div>
+  </div>
+
+  <!-- Q8 — CROSS PARAGRAPH -->
+  <div class="qblock" id="qblock8">
+    <div class="q-top"><span class="q-num">8.</span><span class="pts-tag">10 points</span></div>
+    <div class="q-text">In <strong>paragraph II</strong>, procrastination is described as connected to emotions. Find <u>ONE</u> reason from <strong>paragraph V</strong> that explains why this emotional problem can be reduced.</div>
+    <div class="stem-line">ANSWER:</div>
+    <textarea class="open-ta" id="q8ans" placeholder="Write your answer..." oninput="onOpenType(8)" style="min-height:60px;"></textarea>
+    <button class="check-btn" id="check8" onclick="checkOpen(8)" disabled>Check with AI</button>
+    <div class="spinner" id="spin8">⏳ Checking with AI…</div>
+    <div class="fb" id="fb8"></div>
+  </div>
+
+  <hr class="section-hr">
+
+  <!-- PART II VOCAB -->
+  <div class="section-title">Part II: Lexical Knowledge <span style="font-weight:400;font-size:.85rem;color:var(--muted)">(30 points)</span></div>
+  <p style="font-size:.88rem;color:var(--muted);margin-bottom:.5rem;">Questions 9–13: Each question has six items (1–6) in Column A and three definitions (A, B, C) in Column B. Match THREE items from Column A to their definitions. Write the number next to its definition. (2 points per correct match)</p>
+
+  <div style="background:var(--cream);border:1px solid var(--border);border-radius:10px;padding:1rem 1.2rem;margin:1rem 0 1.2rem;font-size:.87rem;">
+    <strong style="color:var(--blue);font-family:'Playfair Display',serif;">EXAMPLE</strong>
+    <table class="vtable" style="margin-top:.6rem;">
+      <tr><th>Column A</th><th>Ans.</th><th>Column B</th></tr>
+      <tr><td>1. calendar</td><td></td><td><span class="def-key">A</span> a prize you win in a competition &nbsp;<strong>→ 3</strong></td></tr>
+      <tr><td>2. traffic</td><td></td><td><span class="def-key">B</span> a book showing days and months &nbsp;<strong>→ 1</strong></td></tr>
+      <tr><td>3. prize</td><td></td><td><span class="def-key">C</span> vehicles moving along a road &nbsp;<strong>→ 2</strong></td></tr>
+      <tr><td>4. journey</td><td></td><td></td></tr>
+      <tr><td>5. market</td><td></td><td></td></tr>
+      <tr><td>6. border</td><td></td><td></td></tr>
+    </table>
+  </div>
+
+  <!-- Q9 -->
+  <div class="qblock" id="qblock9">
+    <div class="q-top"><span class="q-num">9.</span><span class="pts-tag">6 points</span></div>
+    <table class="vtable">
+      <tr><th>Column A</th><th style="width:60px">Ans.</th><th>Column B</th></tr>
+      <tr><td>1. to delay</td><td><input class="vans" id="v9a" maxlength="1" oninput="onVT(9)"></td><td><span class="def-key">A</span> to make something smaller or less</td></tr>
+      <tr><td>2. to reduce</td><td><input class="vans" id="v9b" maxlength="1" oninput="onVT(9)"></td><td><span class="def-key">B</span> something that influences a result</td></tr>
+      <tr><td>3. a task</td><td><input class="vans" id="v9c" maxlength="1" oninput="onVT(9)"></td><td><span class="def-key">C</span> to support or give confidence to someone</td></tr>
+      <tr><td>4. to avoid</td><td></td><td></td></tr>
+      <tr><td>5. a factor</td><td></td><td></td></tr>
+      <tr><td>6. to encourage</td><td></td><td></td></tr>
+    </table>
+    <button class="check-btn" id="check9" onclick="checkV(9,{A:2,B:5,C:6})" disabled>Check</button>
+    <div class="fb" id="fb9"></div>
+  </div>
+
+  <!-- Q10 -->
+  <div class="qblock" id="qblock10">
+    <div class="q-top"><span class="q-num">10.</span><span class="pts-tag">6 points</span></div>
+    <table class="vtable">
+      <tr><th>Column A</th><th style="width:60px">Ans.</th><th>Column B</th></tr>
+      <tr><td>1. complex</td><td><input class="vans" id="v10a" maxlength="1" oninput="onVT(10)"></td><td><span class="def-key">A</span> easy to understand and follow</td></tr>
+      <tr><td>2. clear</td><td><input class="vans" id="v10b" maxlength="1" oninput="onVT(10)"></td><td><span class="def-key">B</span> not certain or sure about something</td></tr>
+      <tr><td>3. specific</td><td><input class="vans" id="v10c" maxlength="1" oninput="onVT(10)"></td><td><span class="def-key">C</span> detailed and exact</td></tr>
+      <tr><td>4. common</td><td></td><td></td></tr>
+      <tr><td>5. uncertain</td><td></td><td></td></tr>
+      <tr><td>6. simple</td><td></td><td></td></tr>
+    </table>
+    <button class="check-btn" id="check10" onclick="checkV(10,{A:2,B:5,C:3})" disabled>Check</button>
+    <div class="fb" id="fb10"></div>
+  </div>
+
+  <!-- Q11 -->
+  <div class="qblock" id="qblock11">
+    <div class="q-top"><span class="q-num">11.</span><span class="pts-tag">6 points</span></div>
+    <table class="vtable">
+      <tr><th>Column A</th><th style="width:60px">Ans.</th><th>Column B</th></tr>
+      <tr><td>1. to manage</td><td><input class="vans" id="v11a" maxlength="1" oninput="onVT(11)"></td><td><span class="def-key">A</span> to become better at something</td></tr>
+      <tr><td>2. to improve</td><td><input class="vans" id="v11b" maxlength="1" oninput="onVT(11)"></td><td><span class="def-key">B</span> to keep someone or something safe</td></tr>
+      <tr><td>3. to protect</td><td><input class="vans" id="v11c" maxlength="1" oninput="onVT(11)"></td><td><span class="def-key">C</span> to grow or change in a positive way over time</td></tr>
+      <tr><td>4. to fail</td><td></td><td></td></tr>
+      <tr><td>5. to develop</td><td></td><td></td></tr>
+      <tr><td>6. to increase</td><td></td><td></td></tr>
+    </table>
+    <button class="check-btn" id="check11" onclick="checkV(11,{A:2,B:3,C:5})" disabled>Check</button>
+    <div class="fb" id="fb11"></div>
+  </div>
+
+  <!-- Q12 -->
+  <div class="qblock" id="qblock12">
+    <div class="q-top"><span class="q-num">12.</span><span class="pts-tag">6 points</span></div>
+    <table class="vtable">
+      <tr><th>Column A</th><th style="width:60px">Ans.</th><th>Column B</th></tr>
+      <tr><td>1. anxiety</td><td><input class="vans" id="v12a" maxlength="1" oninput="onVT(12)"></td><td><span class="def-key">A</span> a feeling of worry and nervousness</td></tr>
+      <tr><td>2. performance</td><td><input class="vans" id="v12b" maxlength="1" oninput="onVT(12)"></td><td><span class="def-key">B</span> the quality of how well something is done</td></tr>
+      <tr><td>3. relief</td><td><input class="vans" id="v12c" maxlength="1" oninput="onVT(12)"></td><td><span class="def-key">C</span> a feeling of sadness when expectations are not met</td></tr>
+      <tr><td>4. pressure</td><td></td><td></td></tr>
+      <tr><td>5. disappointment</td><td></td><td></td></tr>
+      <tr><td>6. success</td><td></td><td></td></tr>
+    </table>
+    <button class="check-btn" id="check12" onclick="checkV(12,{A:1,B:2,C:5})" disabled>Check</button>
+    <div class="fb" id="fb12"></div>
+  </div>
+
+  <!-- Q13 -->
+  <div class="qblock" id="qblock13">
+    <div class="q-top"><span class="q-num">13.</span><span class="pts-tag">6 points</span></div>
+    <table class="vtable">
+      <tr><th>Column A</th><th style="width:60px">Ans.</th><th>Column B</th></tr>
+      <tr><td>1. as a result</td><td><input class="vans" id="v13a" maxlength="1" oninput="onVT(13)"></td><td><span class="def-key">A</span> gradually, over a long period</td></tr>
+      <tr><td>2. in contrast</td><td><input class="vans" id="v13b" maxlength="1" oninput="onVT(13)"></td><td><span class="def-key">B</span> used to show a difference between two things</td></tr>
+      <tr><td>3. over time</td><td><input class="vans" id="v13c" maxlength="1" oninput="onVT(13)"></td><td><span class="def-key">C</span> to introduce an example</td></tr>
+      <tr><td>4. for example</td><td></td><td></td></tr>
+      <tr><td>5. at first</td><td></td><td></td></tr>
+      <tr><td>6. in addition</td><td></td><td></td></tr>
+    </table>
+    <button class="check-btn" id="check13" onclick="checkV(13,{A:3,B:2,C:4})" disabled>Check</button>
+    <div class="fb" id="fb13"></div>
+  </div>
+
+  const correctSelected = sel.filter(i=>correctIdxs.includes(i)).length;
+  const wrongSelected   = sel.filter(i=>!correctIdxs.includes(i)).length;
+  let sc = 0;
+  if(correctSelected===2 && wrongSelected===0) sc=14;
+  else if(correctSelected===1) sc=7;
+  else sc=0;
+  scores[1]=sc;
+  document.getElementById('check1').disabled=true;
+
+  if(mode==='practice'){
+    const fb=document.getElementById('fb1');
+    if(sc===14){
+      fb.className='fb fb-ok show';
+      fb.innerHTML='<strong>✓ Perfect — 14/14 pts!</strong>Both correct answers identified: (ii) procrastination is misunderstood as laziness, and (iv) it is a widespread experience.';
+    } else if(sc===7){
+      fb.className='fb fb-partial show';
+      fb.innerHTML='<strong>⚠ 7/14 pts</strong>One correct answer found. The two correct answers are: (ii) researchers say procrastination is more complex than laziness, and (iv) most people have experienced it — it is widespread.';
+    } else {
+      fb.className='fb fb-bad show';
+      fb.innerHTML='<strong>✗ 0/14 pts</strong>Neither correct answer was selected. The correct answers are (ii) and (iv).';
+    }
+  }
+  updateProgress();
+}
+
+// ── SINGLE MC ────────────────────────────────────────────────────────────────
+function selectMC(q,idx){
+  if(answered[q]) return;
+  mcSel[q]=idx;
+  document.querySelectorAll('#q'+q+'opts .mc-opt').forEach((o,i)=>o.classList.toggle('selected',i===idx));
+  document.getElementById('check'+q).disabled=false;
+}
+
+const MC_FB = {
+  6:{
+    right:'Correct! Paragraph V says breaking tasks into smaller steps makes them feel more manageable and improves productivity — we can infer this improves effectiveness.',
+    wrong:['The text does not say large tasks should be avoided — it says to break them into steps.',
+           '',
+           'The text explicitly says people need a strategy — single-tasking and breaking tasks into steps.',
+           'Paragraph IV discusses how emotions cause procrastination, and paragraph V addresses reducing that emotional pressure.']
+  }
+};
+
+function checkMC(q,correctIdx){
+  if(answered[q]) return;
+  const sel=mcSel[q];
+  if(sel===undefined) return;
+  answered[q]=true;
+  const opts=document.querySelectorAll('#q'+q+'opts .mc-opt');
+  opts.forEach((o,i)=>{
+    o.classList.add('disabled'); o.classList.remove('selected');
+    if(i===correctIdx) o.classList.add('correct');
+    else if(i===sel && sel!==correctIdx) o.classList.add('wrong');
+  });
+  document.getElementById('check'+q).disabled=true;
+  scores[q]=sel===correctIdx?pts[q]:0;
+  if(mode==='practice'){
+    const fb=document.getElementById('fb'+q);
+    const info=MC_FB[q];
+    if(sel===correctIdx){
+      fb.className='fb fb-ok show';
+      fb.innerHTML='<strong>✓ Correct! +'+pts[q]+' pts</strong>'+info.right;
+    } else {
+      fb.className='fb fb-bad show';
+      const wrongMsg = info.wrong[sel]||'Not the right interpretation of this paragraph.';
+      fb.innerHTML='<strong>✗ Incorrect — 0 pts</strong>'+wrongMsg+'<div class="model-ans">Correct answer: option '+'i ii iii iv'.split(' ')[correctIdx]+'</div>';
+    }
+  }
+  updateProgress();
+}
+
+// ── OPEN TYPE HANDLERS ────────────────────────────────────────────────────────
+function onOpenType(q){
+  const v=document.getElementById('q'+q+'ans').value.trim();
+  document.getElementById('check'+q).disabled=v.length<2;
+}
+function onOpenType2(){
+  const a=document.getElementById('q2aans').value.trim();
+  const b=document.getElementById('q2bans').value.trim();
+  document.getElementById('check2').disabled=(a.length<2 && b.length<2);
+}
+
+// ── AI PROMPTS ───────────────────────────────────────────────────────────────
+const PROMPTS = {
+  '2a':{pts:8,type:'open',
+    accept:['task feels overwhelming','task is unpleasant','task is too much to handle','the task is overwhelming or unpleasant','feel overwhelmed','task feels difficult or unpleasant','tasks are unpleasant or overwhelming'],
+    reject:['lazy','procrastinate','avoid things','they delay','general','it is bad'],
+    model:'The task feels overwhelming or unpleasant',
+    stem:null
+  },
+  '2b':{pts:8,type:'open',
+    accept:['to reduce stress','in order to reduce stress','procrastination gives emotional relief','short-term emotional relief','avoid stress','reduce stress temporarily','emotional avoidance','it reduces stress','they want to feel better'],
+    reject:['they are lazy','they do not want to work','general','vague','no reason given','it is difficult'],
+    model:'People avoid the task in order to reduce stress — procrastination gives short-term emotional relief',
+    stem:null
+  },
+  3:{pts:8,type:'completion',
+    stem:'people delay tasks because they are afraid',
+    accept:['they will not succeed','of failure','that they will fail','they might fail','of not succeeding','they could fail'],
+    reject:['it is hard','they are lazy','they do not want to','general answer','vague'],
+    model:'they will not succeed / of failure'
+  },
+  4:{pts:8,type:'open',
+    accept:['lack of clear goals','not having clear goals','unclear goals','they do not know what they need to do','unsure about what to do','no clear goal','uncertainty about what to do','when goals are not clear'],
+    reject:['they are lazy','they are afraid','general','emotions','stress','vague'],
+    model:'A lack of clear goals — when people are unsure about what they need to do'
+  },
+  5:{pts:8,type:'purpose',
+    accept:['to show that procrastination is connected to emotions','to explain why people avoid tasks','to show that avoiding tasks provides temporary emotional comfort','to show procrastination gives short-term emotional relief','to explain the emotional basis of procrastination','to show procrastination is not laziness but an emotional response','to show it is not about laziness but about feeling better'],
+    reject:['because it is interesting','to give an example','general','to describe feelings','vague'],
+    model:'To show that procrastination is an emotional response — people avoid tasks to gain short-term relief, not because of laziness'
+  },
+  7:{pts:8,type:'purpose',
+    accept:['to present another cause of procrastination','to explain a reason why people delay starting tasks','to show that fear of failure causes procrastination','to introduce another factor that leads to procrastination','to explain why some people delay','another reason for procrastination'],
+    reject:['because it happens','to describe feelings','general','to give an example of anxiety','vague'],
+    model:'To present fear of failure as another cause of procrastination — to explain why some people delay starting tasks'
+  },
+  8:{pts:10,type:'cross',
+    accept:['breaking large tasks into smaller steps reduces emotional pressure','breaking tasks into smaller steps makes them feel more manageable','smaller steps reduce the emotional pressure','breaking tasks into steps makes them feel less overwhelming','the strategy of breaking tasks reduces the emotional load','makes tasks feel more manageable and less emotionally pressuring'],
+    reject:['because it is better','general','they should work harder','develop habits','improve productivity','vague','wrong paragraph'],
+    model:'Breaking large tasks into smaller steps makes them feel more manageable and reduces the emotional pressure associated with them'
+  }
+};
+
+async function callAI(key, answer){
+  const cfg = PROMPTS[key];
+  const typeNote = cfg.type==='completion'
+    ? `SENTENCE COMPLETION RULE: The student must CONTINUE the stem "${cfg.stem}". If they wrote a new sentence (subject+verb), deduct 50% and do NOT also deduct for grammar. If no new sentence but grammar error, deduct per grammar rules only.`
+    : cfg.type==='cross'
+    ? 'CROSS-PARAGRAPH NOTE: The answer MUST draw on paragraph V (breaking tasks into smaller steps). An answer that only references paragraph II or general ideas = 0.'
+    : cfg.type==='purpose'
+    ? 'PURPOSE QUESTION: The student must explain WHY the writer mentions this — not just what it means. A content summary without purpose = partial credit at best.'
+    : '';
+
+  const prompt = `You are marking a Module E Bagrut English reading comprehension answer.
+Apply the official Israeli Ministry of Education rubric STRICTLY.
+
+ITEM VALUE: ${cfg.pts} points
+STUDENT ANSWER: "${answer}"
+
+ACCEPTABLE ANSWERS (accept these and genuine close paraphrases with same meaning):
+${cfg.accept.map((a,i)=>`${i+1}. ${a}`).join('\n')}
+
+REJECT if the answer is like these (too vague, wrong, or off-topic):
+${cfg.reject.map((r,i)=>`${i+1}. ${r}`).join('\n')}
+
+${typeNote}
+
+RULES — apply in this order:
+1. Blank / Hebrew / "I don't know" → score: 0
+2. Vague with no specific textual content → score: 0
+3. More than 50% wrong → score: 0 (even if some words are correct)
+4. Basically correct but missing info (C3) → deduct 2–4 pts (never more than 50%)
+5. Basically correct with some wrong info (C4) → deduct 2–4 pts (never more than 50%)
+6. Adds irrelevant info (C2) → deduct 2 pts
+7. Adds relevant but unnecessary extra info (C5) → NO deduction
+8. GRAMMAR: spelling/capitalization/punctuation → IGNORE. Wrong tense/form → deduct 2–3 pts for 8–10pt item.
+9. Total deductions cannot push score below 50% of max (unless content is wrong)
+10. NEVER return max−1 unless you can name a specific deduction reason.
+
+Return ONLY this JSON, nothing else:
+{"score":NUMBER,"max":${cfg.pts},"reason":"one clear sentence","tip":"one sentence of feedback or model answer"}`;
+
+  const resp = await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:300,messages:[{role:'user',content:prompt}]})
+  });
+  const data = await resp.json();
+  const text = data.content.map(b=>b.text||'').join('');
+  return JSON.parse(text.replace(/```json|```/g,'').trim());
+}
+
+function showFB(elId, result, modelAns){
+  const fb = document.getElementById(elId);
+  if(result.score===result.max){
+    fb.className='fb fb-ok show';
+    fb.innerHTML=`<strong>✓ Correct! +${result.score} pts</strong>${result.reason}`;
+  } else if(result.score===0){
+    fb.className='fb fb-bad show';
+    fb.innerHTML=`<strong>✗ Incorrect — 0/${result.max} pts</strong>${result.reason}<div class="model-ans">Model answer: ${modelAns}</div>`;
+  } else {
+    fb.className='fb fb-partial show';
+    fb.innerHTML=`<strong>⚠ Partially correct — ${result.score}/${result.max} pts</strong>${result.reason}<div class="model-ans">${result.tip}</div>`;
+  }
+}
+
+// Q2 two-part
+async function checkOpen2(){
+  if(answered[2]) return;
+  const ansA = document.getElementById('q2aans').value.trim();
+  const ansB = document.getElementById('q2bans').value.trim();
+  document.getElementById('check2').disabled=true;
+  document.getElementById('spin2').classList.add('show');
+  try {
+    const [rA,rB] = await Promise.all([
+      ansA ? callAI('2a',ansA) : Promise.resolve({score:0,max:8,reason:'No answer given.',tip:''}),
+      ansB ? callAI('2b',ansB) : Promise.resolve({score:0,max:8,reason:'No answer given.',tip:''})
+    ]);
+    answered[2]=true;
+    scores2.a=rA.score; scores2.b=rB.score;
+    scores[2]=rA.score+rB.score;
+    document.getElementById('spin2').classList.remove('show');
+    if(mode==='practice'){
+      showFB('fb2a',rA,PROMPTS['2a'].model);
+      showFB('fb2b',rB,PROMPTS['2b'].model);
+    }
+    updateProgress();
+  } catch(e){
+    answered[2]=true; scores[2]=16; scores2.a=8; scores2.b=8;
+    document.getElementById('spin2').classList.remove('show');
+    if(mode==='practice'){
+      document.getElementById('fb2a').className='fb fb-ok show';
+      document.getElementById('fb2a').innerHTML='<strong>Answer recorded</strong>Model (a): '+PROMPTS['2a'].model;
+      document.getElementById('fb2b').className='fb fb-ok show';
+      document.getElementById('fb2b').innerHTML='<strong>Answer recorded</strong>Model (b): '+PROMPTS['2b'].model;
+    }
+    updateProgress();
+  }
+}
+
+// Single open
+async function checkOpen(q){
+  if(answered[q]) return;
+  const ans = document.getElementById('q'+q+'ans').value.trim();
+  if(!ans) return;
+  document.getElementById('check'+q).disabled=true;
+  document.getElementById('spin'+q).classList.add('show');
+  try {
+    const r = await callAI(q, ans);
+    answered[q]=true; scores[q]=r.score;
+    document.getElementById('spin'+q).classList.remove('show');
+    if(mode==='practice') showFB('fb'+q,r,PROMPTS[q].model);
+    updateProgress();
+  } catch(e){
+    answered[q]=true; scores[q]=pts[q];
+    document.getElementById('spin'+q).classList.remove('show');
+    if(mode==='practice'){
+      const fb=document.getElementById('fb'+q);
+      fb.className='fb fb-ok show';
+      fb.innerHTML='<strong>Answer recorded</strong><div class="model-ans">Model: '+PROMPTS[q].model+'</div>';
+    }
+    updateProgress();
+  }
+}
+
+// ── VOCAB ────────────────────────────────────────────────────────────────────
+function onVT(q){
+  const inputs=document.querySelectorAll('#qblock'+q+' .vans');
+  document.getElementById('check'+q).disabled=[...inputs].some(i=>i.value.trim()==='');
+}
+
+function checkV(q,correct){
+  if(answered['vd'+q]) return;
+  answered['vd'+q]=true; answered[q]=true;
+  const inputs=document.querySelectorAll('#qblock'+q+' .vans');
+  const letters=Object.keys(correct);
+  let sc=0;
+  inputs.forEach((inp,idx)=>{
+    inp.disabled=true;
+    const letter=letters[idx];
+    const userVal=parseInt(inp.value.trim());
+    if(userVal===correct[letter]){inp.classList.add('ok');sc+=2;}
+    else inp.classList.add('bad');
+  });
+  scores[q]=sc;
+  document.getElementById('check'+q).disabled=true;
+  if(mode==='practice'){
+    const fb=document.getElementById('fb'+q);
+    const ansStr=Object.entries(correct).map(([k,v])=>`${k}→${v}`).join('  ');
+    if(sc===6){fb.className='fb fb-ok show';fb.innerHTML=`<strong>✓ 6/6 pts!</strong>All correct.`;}
+    else if(sc===0){fb.className='fb fb-bad show';fb.innerHTML=`<strong>✗ 0/6 pts</strong>Correct: ${ansStr}`;}
+    else{fb.className='fb fb-partial show';fb.innerHTML=`<strong>⚠ ${sc}/6 pts</strong>Correct: ${ansStr}`;}
+  }
+  updateProgress();
+}
+
+// ── SUBMIT ALL ───────────────────────────────────────────────────────────────
+async function submitAll(){
+  document.getElementById('submitBtn').disabled=true;
+  document.getElementById('markingMsg').classList.add('show');
+
+  // Mark any unanswered MC
+  if(!answered[1] && mc1sel.length>0) checkMC2(1,[1,3]);
+  if(!answered[6] && mcSel[6]!==undefined) checkMC(6,1);
+
+  // Mark all open questions
+  const openTasks=[];
+  if(!answered[2]) openTasks.push(checkOpen2());
+  [3,4,5,7,8].forEach(q=>{ if(!answered[q]) openTasks.push(checkOpen(q)); });
+  await Promise.all(openTasks);
+
+  // Mark any unanswered vocab
+  [{q:9,c:{A:2,B:5,C:6}},{q:10,c:{A:2,B:5,C:3}},{q:11,c:{A:2,B:3,C:5}},
+   {q:12,c:{A:1,B:2,C:5}},{q:13,c:{A:3,B:2,C:4}}].forEach(({q,c})=>{
+    if(!answered['vd'+q]) checkV(q,c);
+  });
+
+  // Show all feedback in test mode
+  if(mode==='test'){
+    // Q1
+    const opts1=document.querySelectorAll('#q1opts .mc-opt');
+    opts1.forEach(o=>o.classList.add('disabled'));
+    [1,3].forEach(i=>opts1[i].classList.add('correct'));
+    const fb1=document.getElementById('fb1');
+    fb1.className='fb '+(scores[1]===14?'fb-ok':scores[1]===7?'fb-partial':'fb-bad')+' show';
+    fb1.innerHTML=`<strong>${scores[1]}/14 pts</strong>Correct answers: (ii) and (iv)`;
+    // Q6
+    const opts6=document.querySelectorAll('#q6opts .mc-opt');
+    opts6.forEach(o=>o.classList.add('disabled'));
+    opts6[1].classList.add('correct');
+    if(mcSel[6]!==undefined && mcSel[6]!==1) opts6[mcSel[6]].classList.add('wrong');
+    const fb6=document.getElementById('fb6');
+    fb6.className='fb '+(scores[6]===8?'fb-ok':'fb-bad')+' show';
+    fb6.innerHTML=`<strong>${scores[6]}/8 pts</strong>${scores[6]===8?'Correct — breaking tasks can improve productivity.':'Correct answer: (ii)'}`;
+    // Vocab
+    [{q:9,c:{A:2,B:5,C:6}},{q:10,c:{A:2,B:5,C:3}},{q:11,c:{A:2,B:3,C:5}},
+     {q:12,c:{A:1,B:2,C:5}},{q:13,c:{A:3,B:2,C:4}}].forEach(({q,c})=>{
+      const fb=document.getElementById('fb'+q);
+      const ansStr=Object.entries(c).map(([k,v])=>`${k}→${v}`).join('  ');
+      fb.className='fb '+(scores[q]===6?'fb-ok':scores[q]===0?'fb-bad':'fb-partial')+' show';
+      fb.innerHTML=`<strong>${scores[q]}/6 pts</strong> Correct: ${ansStr}`;
+    });
+  }
+
+  document.getElementById('markingMsg').classList.remove('show');
+  showScorePanel();
+}
+
+// ── SCORE PANEL ───────────────────────────────────────────────────────────────
+async function showScorePanel(){
+  const reading = scores[1]+scores[2]+scores[3]+scores[4]+scores[5]+scores[6]+scores[7]+scores[8];
+  const vocab   = scores[9]+scores[10]+scores[11]+scores[12]+scores[13];
+  const total   = reading+vocab;
+  const pct     = Math.round(total/110*100);
+
+  document.getElementById('sStudentName').textContent = document.getElementById('sName').value||'';
+  document.getElementById('scoreBig').innerHTML = total+'<span class="score-denom">/110</span>';
+  document.getElementById('scoreSub').textContent = 'Reading + Vocabulary · '+new Date().toLocaleDateString('en-IL');
+  document.getElementById('readingScore').textContent = reading;
+  document.getElementById('vocabScore').textContent = vocab;
+
+  const fill=document.getElementById('scoreBarFill');
+  fill.style.width=pct+'%';
+  fill.style.background=pct>=85?'#4caf50':pct>=70?'#ff9800':'#f44336';
+
+  const msgs=[[90,'Outstanding! You have a strong command of this text. 🏆'],[80,'Well done — a solid performance. Keep building on this. 🌟'],[70,'Good work! Focus on the open questions and you\'ll be there. 👍'],[60,'You\'re on the right track — read the text more carefully. 💪'],[0,'Keep practising. Every exam makes you stronger. 📖']];
+  document.getElementById('scoreMsg').textContent=msgs.find(([t])=>pct>=t)[1];
+  document.getElementById('scorePanel').classList.add('show');
+  document.getElementById('scorePanel').scrollIntoView({behavior:'smooth',block:'center'});
+
+  // Save to Google Sheet
+  await saveToSheet(reading, vocab, total);
+}
+
+async function saveToSheet(reading, vocab, total){
+  const name = document.getElementById('sName').value||'Unknown';
+  const cls  = document.getElementById('sClass').value||'';
+  const date = document.getElementById('sDate').value||new Date().toISOString().split('T')[0];
+  const body = [
+    'exam='+encodeURIComponent(EXAM_ID),
+    'name='+encodeURIComponent(name),
+    'class='+encodeURIComponent(cls),
+    'date='+encodeURIComponent(date),
+    'q1='+scores[1],'q2='+scores[2],'q3='+scores[3],'q4='+scores[4],
+    'q5='+scores[5],'q6='+scores[6],'q7='+scores[7],'q8='+scores[8],
+    'q9='+scores[9],'q10='+scores[10],'q11='+scores[11],'q12='+scores[12],'q13='+scores[13],
+    'reading='+reading,'vocab='+vocab,'total='+total
+  ].join('&');
+  try {
+    await fetch(APPS_SCRIPT_URL,{method:'POST',headers:{'Content-Type':'text/plain'},body});
+    document.getElementById('savedMsg').classList.add('show');
+  } catch(e){ console.warn('Sheet save failed',e); }
+}
+
+// ── INIT ─────────────────────────────────────────────────────────────────────
+setMode('practice');
+document.getElementById('sDate').valueAsDate=new Date();
+updateProgress();
+</script>
+</body>
+</html>
