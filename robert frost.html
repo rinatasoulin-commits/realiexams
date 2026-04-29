@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Road Not Taken - Interactive Lesson</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        /* 1. CORE SETUP */
+        * { box-sizing: border-box; }
+        body { 
+            background-color: #cfd8dc; 
+            margin: 0; 
+            padding: 20px 0; 
+            display: grid; 
+            gap: 20px; 
+            grid-template-columns: 1fr; 
+            place-items: center; 
+        }
+
+        .slide-container {
+            align-items: center;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            font-family: 'Montserrat', sans-serif;
+            height: 720px;
+            justify-content: center;
+            overflow: hidden;
+            padding: 50px;
+            position: relative;
+            width: 1280px;
+        }
+
+        /* 1.1 VIBRANT BACKGROUND DESIGN */
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            background: linear-gradient(90deg, #004d40, #00897b, #ff8f00, #ffc107);
+            z-index: 2;
+        }
+
+        /* 2. TYPOGRAPHY */
+        h1 { font-size: 96px; color: #004d40; margin: 0; line-height: 1; text-transform: uppercase; letter-spacing: -2px; }
+        .slide-title { font-size: 60px; font-weight: 900; color: #00695c; margin-bottom: 30px; text-align: left; width: 100%; }
+        h3 { font-size: 36px; color: #ff8f00; margin-bottom: 15px; border-bottom: 4px solid #ff8f00; display: inline-block; }
+        p, li { font-size: 28px; line-height: 1.4; color: #263238; font-weight: 400; }
+        .subtitle { font-size: 32px; font-weight: 700; color: #00897b; margin-top: 10px; font-style: italic; }
+
+        /* 3. INTERACTIVE WRITING SPACES */
+        .writing-box {
+            background-color: #f1f8e9;
+            border: 4px dashed #004d40;
+            border-radius: 15px;
+            margin-top: 15px;
+            padding: 20px;
+            width: 100%;
+            height: 140px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            color: #1a1a1a;
+            resize: none;
+            transition: all 0.3s;
+        }
+        .writing-box:focus {
+            outline: none;
+            border-style: solid;
+            background-color: #fff;
+            box-shadow: 0 5px 15px rgba(0,77,64,0.1);
+        }
+        .writing-box::placeholder {
+            color: #90a4ae;
+            font-style: italic;
+        }
+
+        /* 4. LAYOUT COMPONENTS */
+        .content-area { flex-grow: 1; width: 100%; display: flex; flex-direction: column; justify-content: center; }
+        .two-column { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%; align-items: start; }
+        
+        .image-wrapper { border-radius: 20px; height: 380px; overflow: hidden; width: 100%; border: 8px solid #004d40; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+        .image-wrapper img { height: 100%; object-fit: cover; width: 100%; }
+
+        .poem-stanza {
+            font-family: 'Playfair Display', serif;
+            font-size: 30px;
+            font-style: italic;
+            line-height: 1.2;
+            color: #1a1a1a;
+            background: #fff8e1;
+            padding: 25px;
+            border-radius: 20px;
+            border-left: 12px solid #ff8f00;
+        }
+
+        .tile-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width: 100%; }
+        .tile { background: #e0f2f1; border-radius: 25px; padding: 20px; border: 4px solid #004d40; text-align: center; }
+        .tile i { font-size: 48px; color: #00695c; margin-bottom: 10px; }
+
+        .video-link { 
+            background: #ffeb3b; 
+            padding: 20px; 
+            border-radius: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 25px; 
+            text-decoration: none; 
+            color: #004d40; 
+            border: 5px solid #004d40;
+            margin-bottom: 10px;
+        }
+        .video-link i { font-size: 50px; color: #d32f2f; }
+        .video-link span { font-size: 28px; font-weight: 900; }
+
+        .task-box { background: #ff8f00; color: white; padding: 25px; border-radius: 20px; }
+        .task-box h3 { color: white; border-color: white; margin-bottom: 5px; }
+
+        .bleed-image-layout { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); padding: 0; align-items: start; }
+        .bleed-image-layout .content-side { padding: 50px; display: flex; flex-direction: column; justify-content: center; height: 100%; }
+        .bleed-image-layout img { height: 720px; width: 100%; object-fit: cover; }
+
+        /* Save Button for Students */
+        .save-hint {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #004d40;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+            z-index: 100;
+            cursor: pointer;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+        }
+        
+        @media print {
+            .save-hint { display: none; }
+            .slide-container { page-break-after: always; box-shadow: none; border: none; }
+            body { background: white; padding: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<button class="save-hint" onclick="window.print()">FINISHED? SAVE AS PDF</button>
+
+<div class="slide-container" id="slide1">
+    <div class="content-area" style="text-align: center;">
+        <p style="font-weight: 900; letter-spacing: 6px; color: #ff8f00; margin-bottom: 20px;">LITERATURE MASTERY SERIES</p>
+        <h1>THE ROAD<br>NOT TAKEN</h1>
+        <p class="subtitle">An Interactive Analysis for the 21st Century</p>
+        <div style="margin-top: 50px; background: #004d40; display: inline-block; padding: 10px 40px; border-radius: 50px;">
+            <p style="color: white; font-weight: 900; margin: 0; letter-spacing: 2px;">POETRY WORKSHOP</p>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide2">
+    <h2 class="slide-title">MEET ROBERT FROST</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3>The Rural Philosopher</h3>
+                <p>Robert Frost (1874–1963) is the voice of New England.</p>
+                <textarea class="writing-box" placeholder="What are three facts about Frost's life?"></textarea>
+            </div>
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1544923246-77307dd654ca?q=80&w=1280" alt="Vintage Style Image">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide3">
+    <h2 class="slide-title">STANZA I: THE DIVERGENCE</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="poem-stanza">
+                Two roads diverged in a yellow wood,<br>
+                And sorry I could not travel both<br>
+                And be one traveler, long I stood<br>
+                And looked down one as far as I could<br>
+                To where it bent in the undergrowth;
+            </div>
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1280" alt="Yellow Wood">
+            </div>
+        </div>
+        <textarea class="writing-box" placeholder="Identify the central conflict in this first stanza..."></textarea>
+    </div>
+</div>
+
+<div class="slide-container" id="slide4">
+    <h2 class="slide-title">STANZA II: THE GRASSY CLAIM</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div class="image-wrapper">
+                <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?q=80&w=1280" alt="Grassy Path">
+            </div>
+            <div class="poem-stanza">
+                Then took the other, as just as fair,<br>
+                And having perhaps the better claim,<br>
+                Because it was grassy and wanted wear;<br>
+                Though as for that the passing there<br>
+                Had worn them really about the same,
+            </div>
+        </div>
+        <textarea class="writing-box" placeholder="Analysis: Is the road actually 'less traveled' here? Cite evidence."></textarea>
+    </div>
+</div>
+
+<div class="slide-container bleed-image-layout" id="slide5">
+    <div class="content-side">
+        <h2 class="slide-title" style="margin-left: 0;">STANZA IV: THE SIGH</h2>
+        <div class="poem-stanza" style="background: white;">
+            I shall be telling this with a sigh<br>
+            Somewhere ages and ages hence:<br>
+            Two roads diverged in a wood, and I—<br>
+            I took the one less traveled by,<br>
+            And that has made all the difference.
+        </div>
+        <textarea class="writing-box" placeholder="Why does the narrator plan to 'sigh' in the future?"></textarea>
+    </div>
+    <div class="image-wrapper" style="height: 720px; border: none; border-radius: 0;">
+        <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?q=80&w=1280" alt="Crossroads">
+    </div>
+</div>
+
+<div class="slide-container" id="slide6">
+    <h2 class="slide-title">VIDEO RESOURCES</h2>
+    <div class="content-area">
+        <a href="https://www.youtube.com/watch?v=KUaQgRiJukA" target="_blank" class="video-link">
+            <i class="fa-brands fa-youtube"></i>
+            <span>Robert Frost Reads the Poem</span>
+        </a>
+        <a href="https://www.youtube.com/watch?v=ie2Mspukx14" target="_blank" class="video-link">
+            <i class="fa-brands fa-youtube"></i>
+            <span>TED-Ed: The Misunderstood Poem</span>
+        </a>
+        <textarea class="writing-box" placeholder="After watching, what is one thing you learned about the poem's meaning?"></textarea>
+    </div>
+</div>
+
+<div class="slide-container" id="slide7">
+    <h2 class="slide-title">SYMBOLS & IMAGERY</h2>
+    <div class="content-area">
+        <div class="tile-grid">
+            <div class="tile">
+                <i class="fa-solid fa-leaf"></i>
+                <h3>YELLOW WOOD</h3>
+                <textarea class="writing-box" style="height: 100px;" placeholder="What does this symbolize?"></textarea>
+            </div>
+            <div class="tile">
+                <i class="fa-solid fa-code-fork"></i>
+                <h3>THE FORK</h3>
+                <textarea class="writing-box" style="height: 100px;" placeholder="What does this symbolize?"></textarea>
+            </div>
+            <div class="tile">
+                <i class="fa-solid fa-cloud-sun"></i>
+                <h3>UNDERGROWTH</h3>
+                <textarea class="writing-box" style="height: 100px;" placeholder="What does this symbolize?"></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide8">
+    <h2 class="slide-title">ANALYTICAL QUESTIONS</h2>
+    <div class="content-area">
+        <div class="two-column">
+            <div>
+                <h3 style="background: #004d40; color: white; padding: 5px 15px; border-radius: 5px;">LOTS</h3>
+                <p style="font-size: 22px;">Identify the setting and the primary decision made by the narrator.</p>
+                <textarea class="writing-box" placeholder="Answer LOTS here..."></textarea>
+            </div>
+            <div>
+                <h3 style="background: #ff8f00; color: white; padding: 5px 15px; border-radius: 5px;">HOTS</h3>
+                <p style="font-size: 22px;">How does Frost use irony to undermine the idea of a 'less traveled' road?</p>
+                <textarea class="writing-box" placeholder="Answer HOTS here..."></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="slide-container" id="slide9">
+    <h2 class="slide-title">POST-READING TASK</h2>
+    <div class="content-area">
+        <div class="task-box">
+            <h3>TASK: THE LETTER FROM "AGES HENCE"</h3>
+            <p>Write a short 5-line message from the traveler's older self. Explain what the "difference" actually was. Was it positive or negative? Use imagery.</p>
+        </div>
+        <textarea class="writing-box" style="height: 250px; background: white;" placeholder="Draft your letter here..."></textarea>
+    </div>
+</div>
+
+<div class="slide-container" id="slide10">
+    <div class="content-area" style="text-align: center;">
+        <h2 style="font-size: 80px; color: #004d40;">REFLECTION</h2>
+        <div style="width: 200px; height: 10px; background: #ff8f00; margin: 30px auto;"></div>
+        <p style="font-size: 32px; font-weight: 900; color: #00695c;">"I took the one less traveled by..."</p>
+        <textarea class="writing-box" style="max-width: 900px; margin: 30px auto; height: 200px;" placeholder="Final thought or class question..."></textarea>
+    </div>
+</div>
+
+</body>
+</html>
